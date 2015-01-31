@@ -1,12 +1,11 @@
 (function (){
   socket.on('tileSolved', function (move){
-    console.log('hiiii')
     $('.list-group')
       .append(
         '<li class="list-group-item">'+
         generateShape(move.tiles)+
         '<span class="badge">'+
-        move.user+
+        (move.user && move.user.username) || '' +
         '</span>'+
         '</li>'
       )

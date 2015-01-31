@@ -38,6 +38,11 @@ socket.on('userSetup', function(){
 	}
 });
 
+socket.on('errorRequest', function (){
+	console.log("WRONG ANSWER")
+	alert("WRONG ANSWER")
+});
+
 function renderTiles(tiles) {
 	$('#row0').empty();
 	$('#row1').empty();
