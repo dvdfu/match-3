@@ -2,6 +2,10 @@ var socket = io();
 var userObj;
 var guess = [];
 var OPACITY = '0.35'
+var time;
+var WRONG_ANSWER_PENALTY = 30;
+var MORE_MOVES_PENALTY = 50;
+
 
 socket.on('gamePhase', function (tiles) {
 	renderTiles(tiles);
@@ -40,10 +44,12 @@ socket.on('existingUser', function(user){
 
 socket.on('errorRequest', function (){
 	console.log("WRONG ANSWER")
+	penalty(WRONG_ANSWER_PENALTY);
 });
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
+	penalty(MORE_MOVES_PENALTY);
 });
 
 function renderTiles(tiles) {
@@ -72,32 +78,48 @@ function renderTiles(tiles) {
 		$('#row' + Math.floor(i / 3)).append(html);
 	}
 
-	$('.tile').on('click', function (){
-		var $el = document.getElementById($(this)[0].id)
-		var id = parseInt($el.id)
-
-		if($el.style && $el.style.opacity === OPACITY){
-			$el.style.opacity=1
-			var index = guess.indexOf(id)
-			guess.splice(index, index+1)
-		} else if(guess.length < 3){
-			guess.push(id)
-			$el.style.opacity=OPACITY
-			if(guess.length === 3){
-				socket.emit('tileSolveRequest', {
-					user: userObj,
-					tiles: guess.sort(function (a,b){return a-b})
-				})
-				for (var i = guess.length - 1; i >= 0; i--) {
-					document.getElementById(guess[i]).style.opacity = 1
-				};
-				guess = []
-			}
-		}
-	});
-
+	$('.tile').on('click', tileClickHandler);
 	$('#no-more').on('click', function() {
 		socket.emit('noMoreMovesRequest', userObj);
 	});
 }
 
+function tileClickHandler(){
+	var $el = document.getElementById($(this)[0].id)
+	var id = parseInt($el.id)
+
+	if($el.style && $el.style.opacity === OPACITY){
+		$el.style.opacity=1
+		var index = guess.indexOf(id)
+		guess.splice(index, index+1)
+	} else if(guess.length < 3){
+		guess.push(id)
+		$el.style.opacity=OPACITY
+		if(guess.length === 3){
+			socket.emit('tileSolveRequest', {
+				user: userObj,
+				tiles: guess.sort(function (a,b){return a-b})
+			})
+			for (var i = guess.length - 1; i >= 0; i--) {
+				document.getElementById(guess[i]).style.opacity = 1
+			};
+			guess = []
+		}
+	}
+}
+
+function penalty(penaltyTime){
+	time = penaltyTime;
+	$('.tile').unbind("click");
+	// TODO: Also handle the no more moves button
+	setInterval(function () {
+		if (time == 0) {
+			$('.tile').bind("click", tileClickHandler);
+			// TODO: Also handle the no more moves button
+			console.log("client time is 0");
+		} else {
+			time--;
+			$("#timer").text("Penalty Time: " + (time / 10).toFixed(1) + "s");
+		}
+	}, 100);
+}
