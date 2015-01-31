@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var tileGenerator = require('./tileGenerator');
+var answers;
 
 var users = [];
 
@@ -51,6 +53,17 @@ io.on('connection', function(socket){
 	socket.on('chat message', function(msg){
 		console.log('message: ' + msg);
 		io.emit('chat message', msg);
+	});
+	socket.on('tile solve request', function(tiles){
+		for(var i = 0; i < answers.length; i++){
+			if( answers[i][0].id === tiles[0].id &&
+				asnwers[i][1].id === tiles[1].id &&
+				answers[i][2].id === tiles[2].id){
+				io.emit('update guess', tiles);
+				answers.splice(i, 1);
+				break;
+			}
+		}
 	});
 });
 
