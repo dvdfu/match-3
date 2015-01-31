@@ -1,5 +1,6 @@
 (function (){
   socket.on('tileSolved', function (move){
+    console.log('hiiii')
     $('.list-group')
       .append(
         '<li class="list-group-item">'+

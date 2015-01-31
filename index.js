@@ -39,7 +39,6 @@ function tileSolveRequest(reqObj, socket){
 			resObj = {  user: reqUser,
 						tiles: reqTiles};
 			io.emit('tileSolved', reqObj);
-			tileSolved = true
 			answers.splice(i, 1);
 			console.log(answers)
 			break;
@@ -50,6 +49,7 @@ function tileSolveRequest(reqObj, socket){
 function setupPhase() {
 	tiles = tileGenerator.generate9Tiles();
 	answers = tileGenerator.solveTiles(tiles);
+	console.log(answers)
 	io.emit('gamePhase', tiles);
 }
 
@@ -77,7 +77,7 @@ io.on('connection', function(socket){
 
 	console.log('a user connected');
 	socket.on('tileSolveRequest', function (reqObj){
-		console.log(util.format('tileSOlveRequest incoming %j', reqObj))
+		console.log(util.format('tileSolveRequest incoming %j', reqObj))
 		tileSolveRequest(reqObj, socket);
 		if (answers.length === 0){
 			io.emit('setupPhase');
