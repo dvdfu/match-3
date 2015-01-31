@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var tileGenerator = require('./tileGenerator');
+var tiles;
+var answers;
 
 var users = [];
 
@@ -24,6 +27,29 @@ function generateUser(){
 	return new_user;
 }
 
+function tileSolveRequest(reqObj, socket){
+	var reqUser = reqObj.user;
+	var reqTiles = reqObj.tiles;
+	for(var i = 0; i < answers.length; i++){
+		if( answers[i][0].id === reqTiles[0] &&
+			asnwers[i][1].id === reqTiles[1] &&
+			answers[i][2].id === reqTiles[2]){
+			resObj = {  user: reqUser,
+						tiles: reqTiles};
+			io.emit('tileSolved', reqObj);
+			tileSolved = true
+			answers.splice(i, 1);
+			break;
+		}
+	}
+}
+
+function setupPhase(){
+	tiles = tileGenerator.generate9Tiles;
+	answers = tileGenerator.solveTiles(tiles);
+	io.emit('gamePhase', tiles);
+}
+
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
@@ -32,7 +58,7 @@ app.get('/', function(req, res){
 app.use(express.static(__dirname+'/public'));
 
 io.on('connection', function(socket){
-	io.emit('user setup');
+	socket.emit('userSetup');
 
 	socket.on('addKikUser', function(user){
 		users.push(new User(user.username, user.thumbnail));
@@ -41,16 +67,16 @@ io.on('connection', function(socket){
 	socket.on('addUser', function(){
 		newUser = generateUser();
 		users.push(newUser);
-		io.emit('set non kik user', newUser);
+		socket.emit('setNonKikUser', newUser);
 	});
 
 	console.log('a user connected');
-	socket.on('disconnect', function(){
-		console.log('user disconnected');
-	});
-	socket.on('chat message', function(msg){
-		console.log('message: ' + msg);
-		io.emit('chat message', msg);
+	socket.on('tileSolveRequest', function(reqObj){
+		tileSolveRequest(reqObj, socket);
+		if(answers.length === 0){
+			io.emit('setupPhase');
+			setTimeout(setupPhase, 5000);
+		}
 	});
 });
 

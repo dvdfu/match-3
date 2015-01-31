@@ -54,9 +54,7 @@ function generate9Tiles(){
   for (var i = 9 - 1; i >= 0; i--) {
     randomTiles.push(tiles.pop())
   }
-  return randomTiles.sort(function (i, j){
-    return i.id-j.id
-  })
+  return randomTiles;
 }
 
 function shuffle(array) {
@@ -75,7 +73,7 @@ function solveTiles(tiles){
   var answers = []
   for (var i = 0; i < 7; i++){
     for(var j = i+1; j < 8; j++){
-      for(var k = i+2; k < 9; k++){
+      for(var k = j+1; k < 9; k++){
         if(
           (( tiles[i].shape === tiles[j].shape &&
               tiles[i].shape === tiles[k].shape ) ||
@@ -93,7 +91,7 @@ function solveTiles(tiles){
               tiles[i].shapeColor !== tiles[k].shapeColor &&
               tiles[j].shapeColor !== tiles[k].shapeColor ))
           ){
-          answers.push([tiles[i], tiles[j], tiles[k]])
+          answers.push([tiles[i], tiles[j], tiles[k]]);
         }
       }
     }
