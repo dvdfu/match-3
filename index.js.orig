@@ -2,10 +2,13 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+<<<<<<< HEAD
+=======
 var tileGenerator = require('./tileGenerator');
 var tiles;
 var answers;
 
+>>>>>>> ee9a5499559aeaaa7b58096b910f8ffa45e1d602
 var users = [];
 
 function User(username, thumbnail){
