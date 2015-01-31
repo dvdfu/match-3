@@ -1,64 +1,64 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Socket.IO chat</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel='stylesheet' type='text/css' href='css/moveLog.css'>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-4">
-          <div class="tile">
-            <div class="shape-triangle">
-            </div>
-          </div>
-        </div>
-				<div class="col-xs-4">
-          <div class="tile">B</div>
-        </div>
-				<div class="col-xs-4">
-          <div class="tile">C</div>
-        </div>
+<head>
+	<title>Socket.IO chat</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel='stylesheet' type='text/css' href='css/moveLog.css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="tile">
+					<div class="shape-triangle">
+					</div>
+				</div>
 			</div>
-      <div class="row">
-        <div class="col-xs-4">
-          <div class="tile">A</div>
-        </div>
-        <div class="col-xs-4">
-          <div class="tile">B</div>
-        </div>
-        <div class="col-xs-4">
-          <div class="tile">C</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-4">
-          <div class="tile">A</div>
-        </div>
-        <div class="col-xs-4">
-          <div class="tile">B</div>
-        </div>
-        <div class="col-xs-4">
-          <div class="tile">C</div>
-        </div>
-      </div>
-      <div class='moveLog'>
-      	<ul class="list-group">
-      		<li class="list-group-item active">Move Log</li>
-
-      	</ul>
-      </div>
-      <ul id="messages"></ul>
-      <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-      </form>
+			<div class="col-xs-4">
+				<div class="tile">B</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="tile">C</div>
+			</div>
 		</div>
-		<script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.js"></script>
-		<script src="//cdn.kik.com/kik/1.0.18/kik.js"></script>
-		<script src="/js/game.js"></script>
-	</body>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="tile">A</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="tile">B</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="tile">C</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="tile">A</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="tile">B</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="tile">C</div>
+			</div>
+		</div>
+		<div class='moveLog'>
+			<ul class="list-group">
+				<li class="list-group-item active">Move Log</li>
+
+			</ul>
+		</div>
+		<ul id="messages"></ul>
+		<form action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+		</form>
+	</div>
+	<script src="//cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="//cdn.kik.com/kik/1.0.18/kik.js"></script>
+	<script src="/js/game.js"></script>
+</body>
 </html>
