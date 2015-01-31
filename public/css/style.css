@@ -6,7 +6,7 @@
 
 body {
 	font: 13px Helvetica, Arial;
-	background-color: #112;
+	background-color: #123;
 }
 
 form {
@@ -36,14 +36,25 @@ form button {
 	text-align: center;
 }
 
+.row {
+	margin: 0px;
+}
+
 #tile-container {
 	margin-top: 20px;
-	margin-bottom: 20px;
 	width: 65%;
 	text-align: center;
+	background: #001;
+	border-radius: 5%;
+	padding: 1.5%;
 }
 
 .col-xs-4 {
+	padding: 5px;
+	text-align: center;
+}
+
+.col-xs-12 {
 	padding: 5px;
 	text-align: center;
 }
@@ -61,14 +72,15 @@ form button {
 }
 
 .shape {
+	
 }
 
 .color-red {
-	fill: #f30;
+	fill: #f41;
 }
 
 .color-blue {
-	fill: #03f;
+	fill: #28f;
 }
 
 .color-yellow {
@@ -76,15 +88,15 @@ form button {
 }
 
 .color-red-light {
-	background: #fa8;
+	background: #711;
 }
 
 .color-blue-light {
-	background: #8af;
+	background: #127;
 }
 
 .color-yellow-light {
-	background: #ff8;
+	background: #761;
 }
 
 #messages {

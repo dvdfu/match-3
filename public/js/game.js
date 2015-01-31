@@ -97,5 +97,9 @@ function renderTiles(tiles) {
 			}
 		}
 	});
+
+	$('#no-more').on('click', function() {
+		socket.emit('noMoreMovesRequest', userObj);
+	});
 }
 
