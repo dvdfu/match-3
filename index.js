@@ -44,7 +44,7 @@ function tileSolveRequest(reqObj, socket){
 	}
 }
 
-function setupPhase(){
+function setupPhase() {
 	tiles = tileGenerator.generate9Tiles();
 	answers = tileGenerator.solveTiles(tiles);
 	io.emit('gamePhase', tiles);
@@ -69,11 +69,13 @@ io.on('connection', function(socket){
 		users.push(newUser);
 		socket.emit('setNonKikUser', newUser);
 	});
+	
+	socket.emit('gamePhase', tiles);
 
 	console.log('a user connected');
 	socket.on('tileSolveRequest', function(reqObj){
 		tileSolveRequest(reqObj, socket);
-		if(answers.length === 0){
+		if (answers.length === 0){
 			io.emit('setupPhase');
 			setTimeout(setupPhase, 5000);
 		}
