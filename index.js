@@ -80,7 +80,7 @@ app.get('/', function(req, res){
 
 app.use(express.static(__dirname+'/public'));
 
-io.on('connection', function(socket){
+io.on('connection', function (socket){
 	socket.emit('userSetup');
 	// TODO: only enter gamephase when actually in game phase
 	socket.emit(phase, tiles);
