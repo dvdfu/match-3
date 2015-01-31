@@ -1,13 +1,9 @@
 (function (){
-  socket.on('tile solved', function (move){
-    var tiles = [
-    { id: 9 },
-    { id: 13 },
-    { id: 20} ]
+  socket.on('tileSolved', function (move){
     $('.list-group')
       .append(
         '<li class="list-group-item">'+
-        JSON.stringify(tiles)+
+        JSON.stringify(move.tiles)+
         '<span class="badge">'+
         move.user+
         '</span>'+
