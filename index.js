@@ -112,8 +112,8 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('noMoreMovesRequest', function(user){
-		console.log(itil.format('noMoreMovesRequest incoming %j', user));
-		noMoreMovesRequest(reqObj, socket);
+		console.log(util.format('noMoreMovesRequest incoming %j', user));
+		noMoreMovesRequest(user, socket);
 	});
 });
 
