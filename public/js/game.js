@@ -13,26 +13,25 @@ socket.on('setNonKikUser', function (user){
 	userObj = user;
 });
 
-socket.on('userSetup', function(){
-	if(kik.enabled){
-		kik.getUser(function (user){
-			if (!user){
-				socket.emit('addUser');
-				console.log("no kik permission");
-			} else {
-				userObj = {
-					username: user.username,
-					thumbnail: user.thumbnail
-				};
-				socket.emit('addKikUser', user);
-				console.log("kik permission");
-			}
-		});
-	} else {
-		socket.emit('addUser');
-		console.log("kik not enabled");
-	}
-});
+if(kik.enabled){
+	kik.getUser(function (user){
+		if (!user){
+			socket.emit('addUser');
+			console.log("no kik permission");
+		} else {
+			userObj = {
+				username: user.username,
+				thumbnail: user.thumbnail
+			};
+			socket.emit('addKikUser', user);
+			console.log("kik permission");
+		}
+	});
+} else {
+	socket.emit('addUser');
+	console.log("kik not enabled");
+}
+
 
 socket.on('existingUser', function(user){
 	userObj = user;
