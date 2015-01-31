@@ -3,6 +3,7 @@ var username;
 var userObj;
 var thumbnail;
 var guess = [];
+var OPACITY = '0.35'
 
 socket.on('gamePhase', function (tiles) {
 	renderTiles(tiles);
@@ -38,14 +39,12 @@ socket.on('userSetup', function(){
 });
 
 function renderTiles(tiles) {
-	var container = document.getElementById('tile-container');
-	var shape;
-
 	$('#row0').empty();
 	$('#row1').empty();
 	$('#row2').empty();
 
 	for (var i = 0; i < tiles.length; i++) {
+		var shape;
 		tile = tiles[i];
 
 		if (tile.shape === 'square') {
@@ -56,29 +55,30 @@ function renderTiles(tiles) {
 			shape = '<circle class="shape color-' + tile.shapeColor + '" cx="50" cy="50" r="50"/>';
 		}
 
-		$('#row' + Math.floor(i / 3)).append(
-			'<div class="col-xs-4">' +
+		var html = '<div class="col-xs-4">' +
 			'<div class="tile color-' + tile.backgroundColor + '" id="'+tile.id +'">' +
 			'<svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none">' +
 			shape +
-			'</svg>' + '</div>' + '</div>');
+			'</svg>' + '</div>' + '</div>'
+
+		$('#row' + Math.floor(i / 3)).append(html);
 	}
 
 	$('.tile').on('click', function (){
 		var $el = document.getElementById($(this)[0].id)
 		var id = parseInt($el.id)
 
-		if($el.style && $el.style.opacity === '0.7'){
+		if($el.style && $el.style.opacity === OPACITY){
 			$el.style.opacity=1
 			var index = guess.indexOf(id)
 			guess.splice(index, index+1)
 		} else if(guess.length < 3){
 			guess.push(id)
-			$el.style.opacity=0.7
+			$el.style.opacity=OPACITY
 			if(guess.length === 3){
 				socket.emit('tileSolveRequest', {
 					user: userObj,
-					tiles: guess
+					tiles: guess.sort(function (a,b){return a-b})
 				})
 				for (var i = guess.length - 1; i >= 0; i--) {
 					document.getElementById(guess[i]).style.opacity = 1
