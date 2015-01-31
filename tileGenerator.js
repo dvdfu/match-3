@@ -1,9 +1,9 @@
 // you can just require this by doing:
-// 
+//
 // var generator = require('./tileGenerator')
-// 
+//
 // then use my 2 methods by doing:
-// 
+//
 // generator.generate9Tiles() or generator.solveTiles(*give array*)
 
 module.exports = (function (){
@@ -15,46 +15,48 @@ module.exports = (function (){
 
 function create27Tiles(){
   return [
-    {shape: 'square', backgroundColor: 'black', shapeColor: 'blue'},
-    {shape: 'square', backgroundColor: 'black', shapeColor: 'red'},
-    {shape: 'square', backgroundColor: 'black', shapeColor: 'yellow'},
-    {shape: 'square', backgroundColor: 'grey', shapeColor: 'blue'},
-    {shape: 'square', backgroundColor: 'grey', shapeColor: 'red'},
-    {shape: 'square', backgroundColor: 'grey', shapeColor: 'yellow'},
-    {shape: 'square', backgroundColor: 'white', shapeColor: 'blue'},
-    {shape: 'square', backgroundColor: 'white', shapeColor: 'red'},
-    {shape: 'square', backgroundColor: 'white', shapeColor: 'yellow'},
+    {id: 1, shape: 'square', backgroundColor: 'black', shapeColor: 'blue'},
+    {id: 2, shape: 'square', backgroundColor: 'black', shapeColor: 'red'},
+    {id: 3, shape: 'square', backgroundColor: 'black', shapeColor: 'yellow'},
+    {id: 4, shape: 'square', backgroundColor: 'grey', shapeColor: 'blue'},
+    {id: 5, shape: 'square', backgroundColor: 'grey', shapeColor: 'red'},
+    {id: 6, shape: 'square', backgroundColor: 'grey', shapeColor: 'yellow'},
+    {id: 7, shape: 'square', backgroundColor: 'white', shapeColor: 'blue'},
+    {id: 8, shape: 'square', backgroundColor: 'white', shapeColor: 'red'},
+    {id: 9, shape: 'square', backgroundColor: 'white', shapeColor: 'yellow'},
 
-    {shape: 'circle', backgroundColor: 'black', shapeColor: 'blue'},
-    {shape: 'circle', backgroundColor: 'black', shapeColor: 'red'},
-    {shape: 'circle', backgroundColor: 'black', shapeColor: 'yellow'},
-    {shape: 'circle', backgroundColor: 'grey', shapeColor: 'blue'},
-    {shape: 'circle', backgroundColor: 'grey', shapeColor: 'red'},
-    {shape: 'circle', backgroundColor: 'grey', shapeColor: 'yellow'},
-    {shape: 'circle', backgroundColor: 'white', shapeColor: 'blue'},
-    {shape: 'circle', backgroundColor: 'white', shapeColor: 'red'},
-    {shape: 'circle', backgroundColor: 'white', shapeColor: 'yellow'},
+    {id: 10, shape: 'circle', backgroundColor: 'black', shapeColor: 'blue'},
+    {id: 11, shape: 'circle', backgroundColor: 'black', shapeColor: 'red'},
+    {id: 12, shape: 'circle', backgroundColor: 'black', shapeColor: 'yellow'},
+    {id: 13, shape: 'circle', backgroundColor: 'grey', shapeColor: 'blue'},
+    {id: 14, shape: 'circle', backgroundColor: 'grey', shapeColor: 'red'},
+    {id: 15, shape: 'circle', backgroundColor: 'grey', shapeColor: 'yellow'},
+    {id: 16, shape: 'circle', backgroundColor: 'white', shapeColor: 'blue'},
+    {id: 17, shape: 'circle', backgroundColor: 'white', shapeColor: 'red'},
+    {id: 18, shape: 'circle', backgroundColor: 'white', shapeColor: 'yellow'},
 
-    {shape: 'triangle', backgroundColor: 'black', shapeColor: 'blue'},
-    {shape: 'triangle', backgroundColor: 'black', shapeColor: 'red'},
-    {shape: 'triangle', backgroundColor: 'black', shapeColor: 'yellow'},
-    {shape: 'triangle', backgroundColor: 'grey', shapeColor: 'blue'},
-    {shape: 'triangle', backgroundColor: 'grey', shapeColor: 'red'},
-    {shape: 'triangle', backgroundColor: 'grey', shapeColor: 'yellow'},
-    {shape: 'triangle', backgroundColor: 'white', shapeColor: 'blue'},
-    {shape: 'triangle', backgroundColor: 'white', shapeColor: 'red'},
-    {shape: 'triangle', backgroundColor: 'white', shapeColor: 'yellow'}
+    {id: 19, shape: 'triangle', backgroundColor: 'black', shapeColor: 'blue'},
+    {id: 20, shape: 'triangle', backgroundColor: 'black', shapeColor: 'red'},
+    {id: 21, shape: 'triangle', backgroundColor: 'black', shapeColor: 'yellow'},
+    {id: 22, shape: 'triangle', backgroundColor: 'grey', shapeColor: 'blue'},
+    {id: 23, shape: 'triangle', backgroundColor: 'grey', shapeColor: 'red'},
+    {id: 24, shape: 'triangle', backgroundColor: 'grey', shapeColor: 'yellow'},
+    {id: 25, shape: 'triangle', backgroundColor: 'white', shapeColor: 'blue'},
+    {id: 26, shape: 'triangle', backgroundColor: 'white', shapeColor: 'red'},
+    {id: 27, shape: 'triangle', backgroundColor: 'white', shapeColor: 'yellow'}
   ]
 }
 
 function generate9Tiles(){
   var randomTiles = []
   var tiles = create27Tiles()
+  shuffle(tiles)
   for (var i = 9 - 1; i >= 0; i--) {
-    shuffle(tiles)
     randomTiles.push(tiles.pop())
   }
-  return randomTiles
+  return randomTiles.sort(function (i, j){
+    return i.id-j.id
+  })
 }
 
 function shuffle(array) {
@@ -96,11 +98,16 @@ function solveTiles(tiles){
       }
     }
   }
+  for (var i = answers.length - 1; i >= 0; i--) {
+    answers[i].sort(function (a,b){
+      return a.id-b.id;
+    })
+  };
   return answers
 }
 
 // TESTS
-// 
+//
 // var selectedTiles = generate9Tiles()
 // console.log(selectedTiles)
 // var answerTiles = solveTiles(selectedTiles)
