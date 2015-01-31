@@ -1,7 +1,5 @@
 var socket = io();
-var username;
 var userObj;
-var thumbnail;
 var guess = [];
 var OPACITY = '0.35'
 
@@ -22,8 +20,6 @@ socket.on('userSetup', function(){
 				socket.emit('addUser');
 				console.log("no kik permission");
 			} else {
-				username = user.username;
-				thumbnail = user.thumbnail;
 				userObj = {
 					username: user.username,
 					thumbnail: user.thumbnail
@@ -36,6 +32,10 @@ socket.on('userSetup', function(){
 		socket.emit('addUser');
 		console.log("kik not enabled");
 	}
+});
+
+socket.on('existingUser', function(user){
+	userObj = user;
 });
 
 socket.on('errorRequest', function (){
