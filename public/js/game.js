@@ -79,9 +79,7 @@ function renderTiles(tiles) {
 	}
 
 	$('.tile').on('click', tileClickHandler);
-	$('#no-more').on('click', function() {
-		socket.emit('noMoreMovesRequest', userObj);
-	});
+	$('#no-more').on('click', noMoreClickHandler);
 }
 
 function tileClickHandler(){
@@ -108,14 +106,18 @@ function tileClickHandler(){
 	}
 }
 
+function noMoreClickHandler(){
+	socket.emit('noMoreMovesRequest', userObj);
+}
+
 function penalty(penaltyTime){
 	time = penaltyTime;
 	$('.tile').unbind("click");
-	// TODO: Also handle the no more moves button
+	$('#no-more').unbind("click");
 	setInterval(function () {
 		if (time == 0) {
 			$('.tile').bind("click", tileClickHandler);
-			// TODO: Also handle the no more moves button
+			$('#no-more').bind("click", noMoreClickHandler);
 			console.log("client time is 0");
 		} else {
 			time--;
