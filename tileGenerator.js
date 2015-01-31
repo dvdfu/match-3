@@ -1,3 +1,11 @@
+// you can just require this by doing:
+// 
+// var generator = require('./tileGenerator')
+// 
+// then use my 2 methods by doing:
+// 
+// generator.generate9Tiles() or generator.solveTiles(*give array*)
+
 module.exports = (function (){
   return {
     generate9Tiles: generate9Tiles,
@@ -91,7 +99,9 @@ function solveTiles(tiles){
   return answers
 }
 
-var selectedTiles = generate9Tiles()
-console.log(selectedTiles)
-var answerTiles = solveTiles(selectedTiles)
-console.log(answerTiles)
+// TESTS
+// 
+// var selectedTiles = generate9Tiles()
+// console.log(selectedTiles)
+// var answerTiles = solveTiles(selectedTiles)
+// console.log(answerTiles)
