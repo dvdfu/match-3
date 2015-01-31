@@ -55,10 +55,8 @@ function tileSolveRequest(reqObj, socket){
 }
 
 function setupPhase() {
-	while(answers.length < 1){
-		tiles = tileGenerator.generate9Tiles();
-		answers = tileGenerator.solveTiles(tiles);
-	}
+	tiles = tileGenerator.generate9Tiles();
+	answers = tileGenerator.solveTiles(tiles);
 	console.log(answers)
 	phase = 'gamePhase';
 	io.emit(phase, tiles);
