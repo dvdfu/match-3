@@ -11,10 +11,6 @@ socket.on('setNonKikUser', function(user){
 	userObj = user;
 });
 
-socket.on('gamePhase', function (tiles){
-	renderTiles(tiles);
-})
-
 socket.on('userSetup', function(){
 	if(kik.enabled){
 		kik.getUser(function (user){
