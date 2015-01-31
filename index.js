@@ -85,7 +85,7 @@ io.on('connection', function(socket){
 	// TODO: only enter gamephase when actually in game phase
 	socket.emit(phase, tiles);
 
-	socket.on('addKikUser', function(user){
+	socket.on('addKikUser', function (user){
 		var currentUser = userExists(user.username);
 		if(currentUser !== -1){
 			socket.emit('existingUser', currentUser);
