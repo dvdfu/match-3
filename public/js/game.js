@@ -40,12 +40,10 @@ socket.on('existingUser', function(user){
 
 socket.on('errorRequest', function (){
 	console.log("WRONG ANSWER")
-	alert("WRONG ANSWER")
 });
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
-	alert("THERE ARE STILL MOVES");
 });
 
 function renderTiles(tiles) {
