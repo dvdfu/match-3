@@ -54,7 +54,9 @@ function generate9Tiles(){
   for (var i = 9 - 1; i >= 0; i--) {
     randomTiles.push(tiles.pop())
   }
-  return randomTiles
+  return randomTiles.sort(function (i, j){
+    return i.id-j.id
+  })
 }
 
 function shuffle(array) {
@@ -96,6 +98,11 @@ function solveTiles(tiles){
       }
     }
   }
+  for (var i = answers.length - 1; i >= 0; i--) {
+    answers[i].sort(function (a,b){
+      return a.id-b.id;
+    })
+  };
   return answers
 }
 
