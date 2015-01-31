@@ -6,6 +6,7 @@
 
 body {
 	font: 13px Helvetica, Arial;
+	background-color: #112;
 }
 
 form {
@@ -28,6 +29,38 @@ form button {
 	background: rgb(130, 224, 255);
 	border: none;
 	padding: 10px;
+}
+
+.container {
+
+}
+
+.col-xs-4 {
+	text-align: center;
+	padding: 0px;
+}
+
+.tile {
+	background: #fff;
+	border-radius: 10%;
+	height: 100px;
+	/*margin: 15% 0px 0px 0px;*/
+}
+
+.shape-triangle {
+	width: 0;
+	height: 0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-bottom: 100px solid red;
+}
+
+.shape-square {
+
+}
+
+.shape-circle {
+	
 }
 
 #messages {

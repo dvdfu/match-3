@@ -108,7 +108,7 @@ function solveTiles(tiles){
 
 // TESTS
 //
-// var selectedTiles = generate9Tiles()
-// console.log(selectedTiles)
-// var answerTiles = solveTiles(selectedTiles)
-// console.log(answerTiles)
+var selectedTiles = generate9Tiles()
+console.log(selectedTiles)
+var answerTiles = solveTiles(selectedTiles)
+console.log(answerTiles)
