@@ -45,7 +45,7 @@ function tileSolveRequest(reqObj, socket){
 }
 
 function setupPhase(){
-	tiles = tileGenerator.generate9Tiles;
+	tiles = tileGenerator.generate9Tiles();
 	answers = tileGenerator.solveTiles(tiles);
 	io.emit('gamePhase', tiles);
 }
@@ -79,6 +79,8 @@ io.on('connection', function(socket){
 		}
 	});
 });
+
+setupPhase();
 
 http.listen(process.env.PORT || 3000, function(){
 	console.log('listening on *:3000');
