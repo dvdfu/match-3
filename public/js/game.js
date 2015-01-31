@@ -35,8 +35,8 @@ socket.on('userSetup', function(){
 });
 
 $('.tile').on('click', function (){
-	var id = 4//parseInt($(this).id)
-	var $el = $(this)[0]//document.getElementById(id)
+	var id = parseInt($(this).id)
+	var $el = document.getElementById(id)
 	if($el.style && $el.style.opacity === '0.7'){
 		$el.style.opacity=1
 		var index = guess.indexOf(id)
