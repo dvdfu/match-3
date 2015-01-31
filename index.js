@@ -19,7 +19,7 @@ function User(username, thumbnail){
 function userExists(name){
   for(var i = 0; i < users.length; i++){
     if(users[i].username == name){
-        return i;
+        return users[i];
     }
   }
   return -1;
