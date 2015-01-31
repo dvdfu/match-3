@@ -2,6 +2,13 @@
   "name": "match-3",
   "version": "0.0.1",
   "description": "kik hackathon weekend project!",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvdfu/match-3"
+  },
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
     "express": "^4.10.2",
     "socket.io": "^1.3.2"
