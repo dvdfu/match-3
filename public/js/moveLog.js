@@ -3,6 +3,7 @@
     $('.list-group')
       .append(
         '<li class="list-group-item">'+
+        (move.user ? '<img src="'+ move.user.thumbnail +'"/>' : '') +
         generateShape(move.tiles)+
         '<span class="badge">'+
         (move.user && move.user.username) || '' +
@@ -12,8 +13,9 @@
   });
 
   function generateShape(tiles){
-    var html, shape;
-    for (var i = 0; i < tiles.length; i++) {
+    var shape;
+    var html = '';
+    for (var i = 0; i < 3; i++) {
       tile = tiles[i];
 
       if (tile.shape === 'square') {
@@ -24,7 +26,7 @@
         shape = '<circle class="shape color-' + tile.shapeColor + '" cx="50" cy="50" r="50"/>';
       }
 
-      html += ('<div class="col-xs-4">' +
+      html += ('<div class="tileWrapper">' +
       '<div class="tile color-' + tile.backgroundColor + '" id="'+tile.id +'">' +
       '<svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none">' +
       shape +
