@@ -5,21 +5,15 @@ var userObj;
 var thumbnail;
 var guess = [];
 
-$('form').submit(function(){
-	socket.emit('chat message', $('#m').val());
-	$('#m').val('');
-	return false;
-});
-
-socket.on('chat message', function(msg){
-	$('#messages').append($('<li>').text(msg));
-});
-
 socket.on('setNonKikUser', function(user){
 	username = user.username;
 	thumbnail = user.thumbnail;
 	userObj = user;
 });
+
+socket.on('gamePhase', function (tiles){
+	renderTiles(tiles);
+})
 
 socket.on('userSetup', function(){
 	if(kik.enabled){
