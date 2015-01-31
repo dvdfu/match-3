@@ -5,6 +5,8 @@ var OPACITY = '0.35'
 
 socket.on('gamePhase', function (tiles) {
 	renderTiles(tiles);
+	$('.list-group').empty()
+	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
 })
 
 socket.on('setNonKikUser', function (user){
