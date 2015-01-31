@@ -85,9 +85,8 @@ function noMoreMovesRequest(user, socket){
 		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
 		if(score[reqUser.username]){
-			score[reqUser.username].points -= 1;
-			if(score[reqUser.username].points < 0){
-				score[reqUser.username].points = 0;
+			if(score[reqUser.username].points > 0){
+				score[reqUser.username].points -= 1;
 			}
 		} else {
 			score[reqUser.username] = {
