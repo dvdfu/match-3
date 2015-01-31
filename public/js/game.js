@@ -1,7 +1,5 @@
 var socket = io();
-var username;
 var userObj;
-var thumbnail;
 var guess = [];
 var OPACITY = '0.35'
 
@@ -10,8 +8,6 @@ socket.on('gamePhase', function (tiles) {
 })
 
 socket.on('setNonKikUser', function (user){
-	username = user.username;
-	thumbnail = user.thumbnail;
 	userObj = user;
 });
 
@@ -22,8 +18,6 @@ socket.on('userSetup', function(){
 				socket.emit('addUser');
 				console.log("no kik permission");
 			} else {
-				username = user.username;
-				thumbnail = user.thumbnail;
 				userObj = {
 					username: user.username,
 					thumbnail: user.thumbnail
