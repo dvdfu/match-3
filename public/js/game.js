@@ -45,12 +45,18 @@ socket.on('existingUser', function(user){
 
 socket.on('errorRequest', function (){
 	console.log("WRONG ANSWER")
-	penalty(WRONG_ANSWER_PENALTY);
+	var tiles = $('.tile')
+	for (var i = tiles.length - 1; i >= 0; i--) {
+		if(tiles[i].style.opacity === OPACITY){
+			tiles[i].
+		}
+	};
+	//penalty(WRONG_ANSWER_PENALTY);
 });
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
-	penalty(MORE_MOVES_PENALTY);
+	//penalty(MORE_MOVES_PENALTY);
 });
 
 function renderTiles(tiles) {
@@ -99,9 +105,10 @@ function tileClickHandler(){
 				user: userObj,
 				tiles: guess.sort(function (a,b){return a-b})
 			})
-			for (var i = guess.length - 1; i >= 0; i--) {
-				document.getElementById(guess[i]).style.opacity = 1
-			};
+			// for (var i = guess.length - 1; i >= 0; i--) {
+			// 	document.getElementById(guess[i]).style.opacity = 1
+			// };
+
 			guess = []
 		}
 	}
