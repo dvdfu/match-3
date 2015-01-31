@@ -48,6 +48,17 @@ function tileSolveRequest(reqObj, socket){
 	}
 }
 
+function noMoreMovesRequest(user, socket){
+	if(answers.length === 0){
+		console.log('No more moves found by user: ' + user);
+		io.emit('setupPhase');
+		setTimeout(setupPhase, 5000);
+	} else {
+		console.log('There are still more moves: ' + user);
+		socket.emit('errorNoMoreMovesRequest');
+	}
+}
+
 function setupPhase() {
 	tiles = tileGenerator.generate9Tiles();
 	answers = tileGenerator.solveTiles(tiles);
@@ -85,6 +96,11 @@ io.on('connection', function(socket){
 			io.emit('setupPhase');
 			setTimeout(setupPhase, 5000);
 		}
+	});
+
+	socket.on('noMoreMovesRequest', function(user){
+		console.log(itil.format('noMoreMovesRequest incoming %j', user));
+		noMoreMovesRequest(reqObj, socket);
 	});
 });
 
