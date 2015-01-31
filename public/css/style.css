@@ -36,7 +36,7 @@ form button {
 	text-align: center;
 }
 
-.tile-container {
+#tile-container {
 	margin-top: 10px;
 	width: 65%;
 	text-align: center;
@@ -65,21 +65,27 @@ form button {
 .color-red {
 	fill: #f30;
 }
+
 .color-blue {
 	fill: #03f;
 }
+
 .color-yellow {
 	fill: #fc0;
 }
+
 .color-red-light {
 	background: #fa8;
 }
+
 .color-blue-light {
 	background: #8af;
 }
+
 .color-yellow-light {
 	background: #ff8;
 }
+
 #messages {
 	list-style-type: none;
 	margin: 0;
