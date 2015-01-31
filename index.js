@@ -7,6 +7,7 @@ var util = require('util')
 var phase;
 var tiles;
 var answers = [];
+var moveLog = [];
 var bobNum = 1;
 
 var users = [];
@@ -45,6 +46,7 @@ function tileSolveRequest(reqObj, socket){
 						tiles: answers[i]};
 			io.emit('tileSolved', resObj);
 			answers.splice(i, 1);
+			moveLog.push(resObj);
 			console.log('answers left: ' + answers.length)
 			break;
 		}
@@ -84,6 +86,9 @@ io.on('connection', function (socket){
 	socket.emit('userSetup');
 	// TODO: only enter gamephase when actually in game phase
 	socket.emit(phase, tiles);
+	for(var i = 0; i < moveLog.length; i++){
+		socket.emit('tileSolved', moveLog[i]);
+	}
 
 	socket.on('addKikUser', function (user){
 		var currentUser = userExists(user.username);

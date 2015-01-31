@@ -3,8 +3,9 @@ var userObj;
 var guess = [];
 var OPACITY = '0.35'
 var time;
-var WRONG_ANSWER_PENALTY = 30;
-var MORE_MOVES_PENALTY = 50;
+var WRONG_ANSWER_PENALTY = 20;
+var MORE_MOVES_PENALTY = 30;
+var clear_interval;
 
 
 socket.on('gamePhase', function (tiles) {
@@ -114,11 +115,12 @@ function penalty(penaltyTime){
 	time = penaltyTime;
 	$('.tile').unbind("click");
 	$('#no-more').unbind("click");
-	setInterval(function () {
+	clear_interval = setInterval(function () {
 		if (time == 0) {
 			$('.tile').bind("click", tileClickHandler);
 			$('#no-more').bind("click", noMoreClickHandler);
 			console.log("client time is 0");
+			clearInterval(clear_interval);
 		} else {
 			time--;
 			$("#timer").text("Penalty Time: " + (time / 10).toFixed(1) + "s");
