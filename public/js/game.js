@@ -2,6 +2,21 @@ var socket = io();
 var username;
 var thumbnail;
 
+
+var tiles = [
+    {id: 1, shape: 'square', backgroundColor: 'black', shapeColor: 'blue'},
+    {id: 2, shape: 'square', backgroundColor: 'black', shapeColor: 'red'},
+    {id: 3, shape: 'square', backgroundColor: 'black', shapeColor: 'yellow'},
+    {id: 4, shape: 'square', backgroundColor: 'grey', shapeColor: 'blue'},
+    {id: 5, shape: 'square', backgroundColor: 'grey', shapeColor: 'red'},
+    {id: 6, shape: 'square', backgroundColor: 'grey', shapeColor: 'yellow'},
+    {id: 7, shape: 'square', backgroundColor: 'white', shapeColor: 'blue'},
+    {id: 8, shape: 'square', backgroundColor: 'white', shapeColor: 'red'},
+    {id: 9, shape: 'square', backgroundColor: 'white', shapeColor: 'yellow'}
+    ];
+
+renderTiles(tiles);
+
 $('form').submit(function(){
 	socket.emit('chat message', $('#m').val());
 	$('#m').val('');
@@ -60,11 +75,9 @@ function renderTiles(tiles) {
 
 		$('#row' + Math.floor(i / 3)).append(
 			'<div class="col-xs-4">' +
-	        	'<div class="tile color-' + bgColor + '">' +
-	            	'<svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none">' +
-	            		shape +
-	            	'</svg>' +
-	            '</div>' +
-	        '</div>');
+	        '<div class="tile color-' + bgColor + '">' +
+	        '<svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none">' +
+	        shape +
+	        '</svg>' + '</div>' + '</div>');
 	}
 }
