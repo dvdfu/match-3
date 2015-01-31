@@ -1,6 +1,7 @@
 var socket = io();
 
 var username;
+var userObj;
 var thumbnail;
 var guess = [];
 
@@ -17,6 +18,7 @@ socket.on('chat message', function(msg){
 socket.on('set non kik user', function(user){
 	username = user.username;
 	thumbnail = user.thumbnail;
+	userObj = user;
 });
 
 socket.on('user setup', function(){
@@ -50,7 +52,7 @@ $('.tile').on('click', function (){
 		$el.style.opacity=0.7
 		if(guess.length === 3){
 			socket.emit('tileSolveRequest', {
-				user: username,
+				user: userObj,
 				tiles: guess
 			})
 			for (var i = guess.length - 1; i >= 0; i--) {
