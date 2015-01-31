@@ -43,6 +43,11 @@ socket.on('errorRequest', function (){
 	alert("WRONG ANSWER")
 });
 
+socket.on('errorNoMoreMovesRequest',function(){
+	console.log("THERE ARE STILL MOVES");
+	alert("THERE ARE STILL MOVES");
+});
+
 function renderTiles(tiles) {
 	$('#row0').empty();
 	$('#row1').empty();
