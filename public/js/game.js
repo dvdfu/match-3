@@ -4,16 +4,16 @@ var thumbnail;
 
 
 var tiles = [
-    {id: 1, shape: 'square', backgroundColor: 'black', shapeColor: 'blue'},
-    {id: 2, shape: 'square', backgroundColor: 'black', shapeColor: 'red'},
-    {id: 3, shape: 'square', backgroundColor: 'black', shapeColor: 'yellow'},
-    {id: 4, shape: 'square', backgroundColor: 'grey', shapeColor: 'blue'},
-    {id: 5, shape: 'square', backgroundColor: 'grey', shapeColor: 'red'},
-    {id: 6, shape: 'square', backgroundColor: 'grey', shapeColor: 'yellow'},
-    {id: 7, shape: 'square', backgroundColor: 'white', shapeColor: 'blue'},
-    {id: 8, shape: 'square', backgroundColor: 'white', shapeColor: 'red'},
-    {id: 9, shape: 'square', backgroundColor: 'white', shapeColor: 'yellow'}
-    ];
+	{id: 1, shape: 'square', backgroundColor: 'black', shapeColor: 'blue'},
+	{id: 2, shape: 'square', backgroundColor: 'black', shapeColor: 'red'},
+	{id: 3, shape: 'square', backgroundColor: 'black', shapeColor: 'yellow'},
+	{id: 4, shape: 'square', backgroundColor: 'grey', shapeColor: 'blue'},
+	{id: 5, shape: 'square', backgroundColor: 'grey', shapeColor: 'red'},
+	{id: 6, shape: 'square', backgroundColor: 'grey', shapeColor: 'yellow'},
+	{id: 7, shape: 'square', backgroundColor: 'white', shapeColor: 'blue'},
+	{id: 8, shape: 'square', backgroundColor: 'white', shapeColor: 'red'},
+	{id: 9, shape: 'square', backgroundColor: 'white', shapeColor: 'yellow'}
+	];
 
 renderTiles(tiles);
 
@@ -66,18 +66,18 @@ function renderTiles(tiles) {
 		}
 
 		if (tile.shape === 'square') {
-            shape = '<rect class="shape color-' + tile.shapeColor + '" x="0" y="0" width="100" height="100"/>';
+			shape = '<rect class="shape color-' + tile.shapeColor + '" x="0" y="0" width="100" height="100"/>';
 		} else if (tile.shape === 'triangle') {
-            shape = '<polygon class="shape color-' + tile.shapeColor + '" points="50,0 0,100 100,100"/>';
+			shape = '<polygon class="shape color-' + tile.shapeColor + '" points="50,0 0,100 100,100"/>';
 		} else if (tile.shape === 'circle') {
 			shape = '<circle class="shape color-' + tile.shapeColor + '" cx="50" cy="50" r="50"/>';
 		}
 
 		$('#row' + Math.floor(i / 3)).append(
 			'<div class="col-xs-4">' +
-	        '<div class="tile color-' + bgColor + '">' +
-	        '<svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none">' +
-	        shape +
-	        '</svg>' + '</div>' + '</div>');
+			'<div class="tile color-' + bgColor + '">' +
+			'<svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none">' +
+			shape +
+			'</svg>' + '</div>' + '</div>');
 	}
 }
