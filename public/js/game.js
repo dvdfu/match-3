@@ -39,8 +39,8 @@ socket.on('userSetup', function(){
 });
 
 socket.on('errorRequest', function (){
-console.log("WRONG ANSWER")
-alert("WRONG ANSWER")
+	console.log("WRONG ANSWER")
+	alert("WRONG ANSWER")
 });
 
 function renderTiles(tiles) {
