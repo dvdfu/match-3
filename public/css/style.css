@@ -37,7 +37,8 @@ form button {
 }
 
 #tile-container {
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	width: 65%;
 	text-align: center;
 }

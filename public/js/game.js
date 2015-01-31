@@ -4,20 +4,9 @@ var userObj;
 var thumbnail;
 var guess = [];
 
-
-var tiles = [
-	{id: 1, shape: 'square', backgroundColor: 'black', shapeColor: 'blue'},
-	{id: 2, shape: 'square', backgroundColor: 'black', shapeColor: 'red'},
-	{id: 3, shape: 'square', backgroundColor: 'black', shapeColor: 'yellow'},
-	{id: 4, shape: 'square', backgroundColor: 'grey', shapeColor: 'blue'},
-	{id: 5, shape: 'square', backgroundColor: 'grey', shapeColor: 'red'},
-	{id: 6, shape: 'square', backgroundColor: 'grey', shapeColor: 'yellow'},
-	{id: 7, shape: 'square', backgroundColor: 'white', shapeColor: 'blue'},
-	{id: 8, shape: 'square', backgroundColor: 'white', shapeColor: 'red'},
-	{id: 9, shape: 'square', backgroundColor: 'white', shapeColor: 'yellow'}
-	];
-
-renderTiles(tiles);
+socket.on('gamePhase', function(tiles) {
+	renderTiles(tiles);
+})
 
 $('form').submit(function(){
 	socket.emit('chat message', $('#m').val());
@@ -57,6 +46,11 @@ socket.on('userSetup', function(){
 function renderTiles(tiles) {
 	var container = document.getElementById('tile-container');
 	var shape, bgColor;
+
+	$('#row0').empty();
+	$('#row1').empty();
+	$('#row2').empty();
+
 	for (var i = 0; i < tiles.length; i++) {
 		tile = tiles[i];
 
