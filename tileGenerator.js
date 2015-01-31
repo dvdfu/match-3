@@ -50,8 +50,8 @@ function create27Tiles(){
 function generate9Tiles(){
   var randomTiles = []
   var tiles = create27Tiles()
+  shuffle(tiles)
   for (var i = 9 - 1; i >= 0; i--) {
-    shuffle(tiles)
     randomTiles.push(tiles.pop())
   }
   return randomTiles
