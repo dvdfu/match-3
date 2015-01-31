@@ -71,6 +71,7 @@ function setupPhase() {
 	tiles = tileGenerator.generate9Tiles();
 	answers = tileGenerator.solveTiles(tiles);
 	console.log(answers)
+	moveLog = [];
 	phase = 'gamePhase';
 	io.emit(phase, tiles);
 }
@@ -109,11 +110,6 @@ io.on('connection', function(socket){
 	socket.on('tileSolveRequest', function (reqObj){
 		console.log(util.format('tileSolveRequest incoming %j', reqObj))
 		tileSolveRequest(reqObj, socket);
-		if (answers.length === 0){
-			phase = 'setupPhase';
-			io.emit(phase);
-			setTimeout(setupPhase, 5000);
-		}
 	});
 
 	socket.on('noMoreMovesRequest', function(user){
