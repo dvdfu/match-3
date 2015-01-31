@@ -6,6 +6,7 @@ var tileGenerator = require('./tileGenerator');
 var util = require('util')
 var tiles;
 var answers;
+var bobNum = 1;
 
 var users = [];
 
@@ -24,7 +25,8 @@ function userExists(name){
 }
 
 function generateUser(){
-	new_user = new User("Bob", "http://static.tumblr.com/ff8079335ffe2122813751fa64d3a87f/mjzseut/yxOmw9tr5/tumblr_static_lehnereyes.jpg");
+	new_user = new User("Bob " + bobNum, "http://static.tumblr.com/ff8079335ffe2122813751fa64d3a87f/mjzseut/yxOmw9tr5/tumblr_static_lehnereyes.jpg");
+	bobNum += 1;
 	return new_user;
 }
 
@@ -62,6 +64,8 @@ app.use(express.static(__dirname+'/public'));
 
 io.on('connection', function(socket){
 	socket.emit('userSetup');
+	// TODO: only enter gamephase when actually in game phase
+	socket.emit('gamePhase', tiles);
 
 	socket.on('addKikUser', function(user){
 		users.push(new User(user.username, user.thumbnail));
@@ -72,8 +76,6 @@ io.on('connection', function(socket){
 		users.push(newUser);
 		socket.emit('setNonKikUser', newUser);
 	});
-
-	socket.emit('gamePhase', tiles);
 
 	console.log('a user connected');
 	socket.on('tileSolveRequest', function (reqObj){
