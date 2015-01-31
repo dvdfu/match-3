@@ -4,8 +4,9 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var tileGenerator = require('./tileGenerator');
 var util = require('util')
+var phase;
 var tiles;
-var answers;
+var answers = [];
 var bobNum = 1;
 
 var users = [];
@@ -17,7 +18,7 @@ function User(username, thumbnail){
 
 function userExists(name){
   for(var i = 0; i < users.length; i++){
-    if(users[i].name == name){
+    if(users[i].username == name){
         return i;
     }
   }
@@ -33,11 +34,13 @@ function generateUser(){
 function tileSolveRequest(reqObj, socket){
 	var reqUser = reqObj.user;
 	var reqTiles = reqObj.tiles;
+	var correctReq = false;
 	for(var i = 0; i < answers.length; i++){
 		if( answers[i][0].id === reqTiles[0] &&
 			answers[i][1].id === reqTiles[1] &&
 			answers[i][2].id === reqTiles[2]){
 			console.log('Answer found by user: ' + JSON.stringify(reqUser))
+			correctReq = true;
 			resObj = {  user: reqUser,
 						tiles: answers[i]};
 			io.emit('tileSolved', resObj);
@@ -45,6 +48,9 @@ function tileSolveRequest(reqObj, socket){
 			console.log('answers left: ' + answers.length)
 			break;
 		}
+	}
+	if(!correctReq){
+		socket.emit('errorRequest');
 	}
 }
 
@@ -63,7 +69,8 @@ function setupPhase() {
 	tiles = tileGenerator.generate9Tiles();
 	answers = tileGenerator.solveTiles(tiles);
 	console.log(answers)
-	io.emit('gamePhase', tiles);
+	phase = 'gamePhase';
+	io.emit(phase, tiles);
 }
 
 
@@ -76,10 +83,15 @@ app.use(express.static(__dirname+'/public'));
 io.on('connection', function(socket){
 	socket.emit('userSetup');
 	// TODO: only enter gamephase when actually in game phase
-	socket.emit('gamePhase', tiles);
+	socket.emit(phase, tiles);
 
 	socket.on('addKikUser', function(user){
-		users.push(new User(user.username, user.thumbnail));
+		var currentUser = userExists(user.username);
+		if(currentUser !== -1){
+			socket.emit('existingUser', currentUser);
+		} else {
+			users.push(new User(user.username, user.thumbnail));
+		}
 	});
 
 	socket.on('addUser', function(){
@@ -93,7 +105,8 @@ io.on('connection', function(socket){
 		console.log(util.format('tileSolveRequest incoming %j', reqObj))
 		tileSolveRequest(reqObj, socket);
 		if (answers.length === 0){
-			io.emit('setupPhase');
+			phase = 'setupPhase';
+			io.emit(phase);
 			setTimeout(setupPhase, 5000);
 		}
 	});

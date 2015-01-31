@@ -34,6 +34,10 @@ socket.on('userSetup', function(){
 	}
 });
 
+socket.on('existingUser', function(user){
+	userObj = user;
+});
+
 socket.on('errorRequest', function (){
 	console.log("WRONG ANSWER")
 	alert("WRONG ANSWER")
