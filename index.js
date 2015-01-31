@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var tileGenerator = require('./tileGenerator');
+var util = require('util')
 var tiles;
 var answers;
 
@@ -32,13 +33,15 @@ function tileSolveRequest(reqObj, socket){
 	var reqTiles = reqObj.tiles;
 	for(var i = 0; i < answers.length; i++){
 		if( answers[i][0].id === reqTiles[0] &&
-			asnwers[i][1].id === reqTiles[1] &&
+			answers[i][1].id === reqTiles[1] &&
 			answers[i][2].id === reqTiles[2]){
+			console.log(reqTiles)
 			resObj = {  user: reqUser,
 						tiles: reqTiles};
 			io.emit('tileSolved', reqObj);
 			tileSolved = true
 			answers.splice(i, 1);
+			console.log(answers)
 			break;
 		}
 	}
@@ -69,11 +72,12 @@ io.on('connection', function(socket){
 		users.push(newUser);
 		socket.emit('setNonKikUser', newUser);
 	});
-	
+
 	socket.emit('gamePhase', tiles);
 
 	console.log('a user connected');
-	socket.on('tileSolveRequest', function(reqObj){
+	socket.on('tileSolveRequest', function (reqObj){
+		console.log(util.format('tileSOlveRequest incoming %j', reqObj))
 		tileSolveRequest(reqObj, socket);
 		if (answers.length === 0){
 			io.emit('setupPhase');
