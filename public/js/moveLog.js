@@ -9,10 +9,10 @@
       .append(
         '<li class="list-group-item">'+
         (move.user ? '<img src="'+ move.user.thumbnail +'"/>' : '') +
-        generateShape(move.tiles)+
         '<span class="badge">'+
         (move.user && move.user.username) || '' +
         '</span>'+
+        generateShape(move.tiles)+
         '</li>'
       )
 

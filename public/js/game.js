@@ -28,7 +28,7 @@ socket.on('userSetup', function(){
 					username: user.username,
 					thumbnail: user.thumbnail
 				};
-				socket.emit('addKikUser', user);
+				socket.emit('addKikUser', userObj);
 				console.log("kik permission");
 			}
 		});
