@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.moveLog {
+  margin: 0px 15px;
+}
+
 .list-group-item > .showThumbail {
   float: right;
 }
