@@ -1,5 +1,10 @@
 (function (){
   socket.on('tileSolved', function (move){
+    $('.list-group-item.active').remove()
+    var log = $('.list-group-item')
+    $('.list-group').empty()
+
+    $('.list-group').append('<li class="list-group-item active">Move Log</li>')
     $('.list-group')
       .append(
         '<li class="list-group-item">'+
@@ -10,6 +15,8 @@
         '</span>'+
         '</li>'
       )
+
+    $('.list-group').append(log)
   });
 
   function generateShape(tiles){
