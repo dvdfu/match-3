@@ -37,11 +37,11 @@ function tileSolveRequest(reqObj, socket){
 		if( answers[i][0].id === reqTiles[0] &&
 			answers[i][1].id === reqTiles[1] &&
 			answers[i][2].id === reqTiles[2]){
-			console.log('Answer found by user: ' + reqUser)
-
+			console.log('Answer found by user: ' + JSON.stringify(reqUser))
+			console.log(answers[i])
 			resObj = {  user: reqUser,
 						tiles: answers[i]};
-			io.emit('tileSolved', reqObj);
+			io.emit('tileSolved', resObj);
 			answers.splice(i, 1);
 			console.log(answers)
 			break;

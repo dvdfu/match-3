@@ -5,7 +5,7 @@
         '<li class="list-group-item">'+
         generateShape(move.tiles)+
         '<span class="badge">'+
-        move.userObj && move.userObj.user+
+        (move.user && move.user.username) || '' +
         '</span>'+
         '</li>'
       )
