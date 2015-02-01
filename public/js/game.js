@@ -3,6 +3,17 @@ var userObj;
 var guess = [];
 var OPACITY = '0.35'
 
+$(document).ready(function() {
+	$('#instructions').on('click', function() {
+		$('#instructions').animate({
+			opacity: 0
+		}, 400, 'swing',
+		function() {
+			$('#instructions').hide();
+		});
+	});
+});
+
 
 socket.on('gamePhase', function (tiles) {
 	renderTiles(tiles);
@@ -105,7 +116,7 @@ function renderTiles(tiles) {
 }
 
 function tileClickHandler(){
-	var $el = document.getElementById($(this)[0].id)
+	var $el = this
 	var id = parseInt($el.id)
 
 	if($el.style && $el.style.opacity === OPACITY){

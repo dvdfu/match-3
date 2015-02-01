@@ -52,6 +52,15 @@ form button {
 	padding: 1.5%;
 }
 
+#instructions {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #001;
+	z-index: 10;
+	padding: 10%;
+}
+
 .col-xs-4 {
 	padding: 5px;
 	text-align: center;
