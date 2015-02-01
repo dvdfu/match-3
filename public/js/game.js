@@ -16,9 +16,12 @@ $(document).ready(function() {
 
 
 socket.on('gamePhase', function (tiles) {
+	guess = [];
 	renderTiles(tiles);
 	$('.list-group').empty()
 	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
+	$('#score').hide();
+	$('#score').css('opacity', 0);
 	// slide(true);
 })
 
@@ -67,9 +70,25 @@ socket.on('errorNoMoreMovesRequest',function(){
 socket.on('setupPhase', function (score){
 	$('.tile').unbind('click');
 	$('#no-more').unbind('click');
+	var topUser;
+	for(var key in score){
+		topUser = score[key];
+		break;
+	}
+	console.log(topUser);
+	for(var key in score){
+		if(score[key].points > topUser.points){
+			topUser = score[key];
+		}
+	}
+	$('#user-image').attr('src', topUser.user.thumbnail);
+	$('#username').text(topUser.user.username);
+	$('#winner-text').text('Winner!');
+	$('#score').show();
+	$('#score').animate({
+		opacity: 1
+	}, 400, 'swing');
 	// slide(false);
-	console.log('score');
-	console.log(score);
 });
 
 function slide(on) {
