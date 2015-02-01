@@ -81,6 +81,7 @@ socket.on('setupPhase', function (score) {
 	$('#user-image').attr('src', topUser.user.thumbnail);
 	$('#username').text(topUser.user.username);
 	$('#winner-text').text('Winner!');
+	$('#runners-up').text('Runners Up');
 	$('#score').show();
 	$('#score').animate({
 		opacity: 1

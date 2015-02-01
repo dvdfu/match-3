@@ -170,6 +170,7 @@ form button {
     color: white;
 }
 
+
 #instructions-title{
 	color: white;
 	font-size: 200%;
@@ -180,3 +181,10 @@ form button {
 	color: gray;
 	font-size: 120%;
 }
+
+#runners-up {
+	color: white;
+	font-size: 200%;
+	margin-top: 5%;
+}
+
