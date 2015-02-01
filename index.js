@@ -60,6 +60,7 @@ function noMoreMovesRequest(user, socket){
 	if(answers.length === 0){
 		console.log('No more moves found by user: ' + user);
 		phase = 'setupPhase';
+		score = 0;
 		io.emit(phase, score);
 		setupPhase();
 	} else {
