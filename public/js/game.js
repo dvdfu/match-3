@@ -106,7 +106,8 @@ function renderTiles(tiles) {
 
 		$('#row' + Math.floor(i / 3)).append(html);
 	}
-
+	$('.tile').unbind('click')
+	$('#no-more').unbind('click')
 	$('.tile').on('click', tileClickHandler);
 	$('#no-more').on('click', noMoreClickHandler);
 }
@@ -139,7 +140,6 @@ function tileClickHandler(){
 function noMoreClickHandler(){
 	socket.emit('noMoreMovesRequest', userObj);
 	$('#no-more').unbind('click')
-
 }
 
 function showCheckMark(){
@@ -157,6 +157,7 @@ function showCheckMark(){
 			$('#showBoard').animate({
 				opacity: 1
 			}, 250, function (){
+				$('.tile').unbind('click')
 				$('.tile').bind('click', tileClickHandler)
 			})
 		}, 500)
@@ -178,7 +179,9 @@ function showX(){
 			$('#showBoard').animate({
 				opacity: 1
 			}, 250, function (){
+				$('.tile').unbind('click')
 				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').unbind('click')
 				$('#no-more').bind('click', noMoreClickHandler)
 			})
 		}, 500)
