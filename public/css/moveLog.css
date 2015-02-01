@@ -36,6 +36,11 @@
   color: red;
 }
 
+#actual-image{
+  width: 100px;
+  height: 100px;
+}
+
 .list-group img {
   height: 30px;
   width: 30px;
