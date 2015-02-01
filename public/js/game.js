@@ -102,7 +102,6 @@ function tileClickHandler(){
 				document.getElementById(guess[i]).style.opacity = 1
 			};
 			$('.tile').unbind('click')
-			$('#no-more').unbind('click')
 			guess = []
 		}
 	}
@@ -110,6 +109,8 @@ function tileClickHandler(){
 
 function noMoreClickHandler(){
 	socket.emit('noMoreMovesRequest', userObj);
+	$('#no-more').unbind('click')
+
 }
 
 function showCheckMark(){
@@ -128,7 +129,6 @@ function showCheckMark(){
 				opacity: 1
 			}, 250, function (){
 				$('.tile').bind('click', tileClickHandler)
-				$('#no-more').bind('click', noMoreClickHandler)
 			})
 		}, 500)
 	})
