@@ -45,6 +45,7 @@ function tileSolveRequest(reqObj, socket){
 			resObj = {  user: reqUser,
 						tiles: answers[i]};
 			io.emit('tileSolved', resObj);
+			socket.emit('successRequest');
 			answers.splice(i, 1);
 			moveLog.push(resObj);
 			console.log('answers left: ' + answers.length)
