@@ -45,6 +45,7 @@ function tileSolveRequest(reqObj, socket){
 			resObj = {  user: reqUser,
 						tiles: answers[i]};
 			io.emit('tileSolved', resObj);
+			socket.emit('successRequest');
 			answers.splice(i, 1);
 			moveLog.push(resObj);
 			console.log('answers left: ' + answers.length)
@@ -59,10 +60,13 @@ function tileSolveRequest(reqObj, socket){
 function noMoreMovesRequest(user, socket){
 	if(answers.length === 0){
 		console.log('No more moves found by user: ' + user);
-		io.emit('setupPhase');
-		setTimeout(setupPhase, 5000);
+		phase = 'setupPhase';
+		score = 0;
+		io.emit(phase, score);
+		setupPhase();
 	} else {
-		console.log('There are still more moves: ' + user);
+		console.log(util.format('There are still more moves: %j', user));
+		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
 	}
 }
@@ -73,7 +77,11 @@ function setupPhase() {
 	console.log(answers)
 	moveLog = [];
 	phase = 'gamePhase';
-	io.emit(phase, tiles);
+	console.log("Before Set Timeout");
+	setTimeout(function(){
+		io.emit(phase, tiles);
+	}, 5000);
+	console.log("After Set Timeout");
 }
 
 

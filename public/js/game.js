@@ -52,6 +52,11 @@ socket.on('errorNoMoreMovesRequest',function(){
 
 });
 
+socket.on('setupPhase', function(score){
+	$('.tile').unbind('click');
+	$('#no-more').unbind('click');
+});
+
 function renderTiles(tiles) {
 	$('#row0').empty();
 	$('#row1').empty();
