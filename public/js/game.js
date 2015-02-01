@@ -19,7 +19,7 @@ socket.on('gamePhase', function (tiles) {
 	guess = [];
 	renderTiles(tiles);
 	$('.list-group').empty()
-	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
+	$('.list-group').append('<li class="list-group-item active">Match History</li>')
 	$('#score').hide();
 	$('#score').css('opacity', 0);
 })
@@ -86,9 +86,10 @@ socket.on('setupPhase', function (score) {
 		opacity: 1
 	}, 400, 'swing');
 
+	$('#scoreboard').empty();
 	for (var key in score) {
 		$('#scoreboard').append(
-			'<li>'+
+			'<li class="list-group-item">'+
 				'<div class="row">'+
 					'<div class="col-xs-4">'+
 						'<img src="'+score[key].user.thumbnail+'"/>'+
@@ -96,7 +97,8 @@ socket.on('setupPhase', function (score) {
 					'<div class="col-xs-4">'+
 						'<span class="badge">'+score[key].user.username+'</span>'+
 					'</div>'+
-					'<div class="col-xs-4">'+score[key].user.points+
+					'<div class="col-xs-4">'+
+						'<span class="badge">'+score[key].points+'</span>'+
 					'</div>'+
 				'</div>'+
 			'</li>');

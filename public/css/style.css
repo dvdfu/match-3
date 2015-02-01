@@ -151,13 +151,13 @@ form button {
 	height: 100%;
 	background: #001;
 	z-index: 10;
-	padding: 25% 5%;
+	padding: 5% 5%;
 }
 
 #user-image {
 	width: 60%;
 	border-radius: 10px;
-	margin: 5%;
+	margin: 0%;
 }
 
 #username {
