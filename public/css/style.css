@@ -162,3 +162,11 @@ form button {
 	font-size: 400%;
     color: white;
 }
+
+#instructions-title{
+	color: white;
+}
+
+.instructions-sub-title{
+	color: gray;
+}
