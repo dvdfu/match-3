@@ -8,6 +8,7 @@ socket.on('gamePhase', function (tiles) {
 	renderTiles(tiles);
 	$('.list-group').empty()
 	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
+	// slide(true);
 })
 
 socket.on('setNonKikUser', function (user){
@@ -50,7 +51,28 @@ socket.on('errorNoMoreMovesRequest',function(){
 socket.on('setupPhase', function(score){
 	$('.tile').unbind('click');
 	$('#no-more').unbind('click');
+	// slide(false);
 });
+
+function slide(on) {
+	if (on) {
+		$('#tile-container').animate({
+			top: '+=300'
+		}, 500);
+
+		$('.moveLog').animate({
+			left: '-=400'
+		}, 500);
+	} else {
+		$('#tile-container').animate({
+			top: '-=300'
+		}, 500);
+
+		$('.moveLog').animate({
+			left: '+=400'
+		}, 500);
+	}
+}
 
 function renderTiles(tiles) {
 	$('#row0').empty();

@@ -34,6 +34,8 @@ form button {
 .container {
 	padding: 0px;
 	text-align: center;
+    overflow-x: hidden; 
+    overflow-y: auto;
 }
 
 .row {
@@ -41,6 +43,7 @@ form button {
 }
 
 #tile-container {
+	position: relative;
 	margin-top: 20px;
 	width: 65%;
 	text-align: center;
