@@ -52,6 +52,8 @@ socket.on('setupPhase', function(score){
 	$('.tile').unbind('click');
 	$('#no-more').unbind('click');
 	// slide(false);
+	console.log('score');
+	console.log(score);
 });
 
 function slide(on) {

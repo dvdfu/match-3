@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var tileGenerator = require('./tileGenerator');
 var util = require('util')
 var phase;
+var score = {};
 var tiles;
 var answers = [];
 var moveLog = [];
@@ -18,12 +19,12 @@ function User(username, thumbnail){
 }
 
 function userExists(name){
-  for(var i = 0; i < users.length; i++){
-    if(users[i].username == name){
-        return users[i];
-    }
-  }
-  return -1;
+	for(var i = 0; i < users.length; i++){
+		if(users[i].username == name){
+			return users[i];
+		}
+	}
+	return -1;
 }
 
 function generateUser(){
@@ -42,6 +43,14 @@ function tileSolveRequest(reqObj, socket){
 			answers[i][2].id === reqTiles[2]){
 			console.log('Answer found by user: ' + JSON.stringify(reqUser))
 			correctReq = true;
+			if(score[reqUser.username]){
+				score[reqUser.username].points += 1;
+			} else {
+				score[reqUser.username] = {
+					user: reqUser,
+					points: 1
+				};
+			}
 			resObj = {  user: reqUser,
 						tiles: answers[i]};
 			io.emit('tileSolved', resObj);
@@ -60,14 +69,33 @@ function tileSolveRequest(reqObj, socket){
 function noMoreMovesRequest(user, socket){
 	if(answers.length === 0){
 		console.log('No more moves found by user: ' + user);
+		if(score[user.username]){
+			score[user.username].points += 2;
+		} else {
+			score[user.username] = {
+				user: user,
+				points: 2
+			};
+		}
 		phase = 'setupPhase';
-		score = 0;
+		console.log('score');
+		console.log(score);
 		io.emit(phase, score);
 		setupPhase();
 	} else {
 		console.log(util.format('There are still more moves: %j', user));
 		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
+		if(score[user.username]){
+			if(score[user.username].points > 0){
+				score[user.username].points -= 1;
+			}
+		} else {
+			score[user.username] = {
+				user: user,
+				points: 0
+			};
+		}
 	}
 }
 
@@ -76,6 +104,7 @@ function setupPhase() {
 	answers = tileGenerator.solveTiles(tiles);
 	console.log(answers)
 	moveLog = [];
+	score = {};
 	console.log("Before Set Timeout");
 	setTimeout(function(){
 		phase = 'gamePhase';
@@ -93,7 +122,7 @@ app.use(express.static(__dirname+'/public'));
 
 io.on('connection', function(socket){
 	socket.emit('userSetup');
-	// TODO: only enter gamephase when actually in game phase
+
 	socket.emit(phase, tiles);
 	for(var i = 0; i < moveLog.length; i++){
 		socket.emit('tileSolved', moveLog[i]);
