@@ -64,6 +64,7 @@ function noMoreMovesRequest(user, socket){
 		setupPhase();
 	} else {
 		console.log('There are still more moves: ' + user);
+		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
 	}
 }
@@ -74,9 +75,11 @@ function setupPhase() {
 	console.log(answers)
 	moveLog = [];
 	phase = 'gamePhase';
+	console.log("Before Set Timeout");
 	setTimeout(function(){
 		io.emit(phase, tiles);
 	}, 5000);
+	console.log("After Set Timeout");
 }
 
 
