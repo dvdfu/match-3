@@ -76,9 +76,9 @@ function setupPhase() {
 	answers = tileGenerator.solveTiles(tiles);
 	console.log(answers)
 	moveLog = [];
-	phase = 'gamePhase';
 	console.log("Before Set Timeout");
 	setTimeout(function(){
+		phase = 'gamePhase';
 		io.emit(phase, tiles);
 	}, 5000);
 	console.log("After Set Timeout");
