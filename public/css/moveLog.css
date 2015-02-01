@@ -36,6 +36,14 @@
   color: red;
 }
 
+#plusone{
+  color: green;
+}
+
+#minusone{
+  color: red;
+}
+
 .list-group img {
   height: 30px;
   width: 30px;

@@ -113,12 +113,14 @@ function noMoreClickHandler(){
 }
 
 function showCheckMark(){
-	$('.fa-times').hide()
+	$('.fa-times').hide();
+	$('#minusone').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
 		$('#showBoard').hide()
-		$('.fa-check').show()
+		$('.fa-check').show();
+		$('#plusone').show();
 		$('#showResult').show()
 
 		setTimeout(function (){
@@ -135,12 +137,14 @@ function showCheckMark(){
 }
 
 function showX(){
-	$('.fa-check').hide()
+	$('.fa-check').hide();
+	$('#plusone').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
 		$('#showBoard').hide()
-		$('.fa-times').show()
+		$('.fa-times').show();
+		$('.minusone').show();
 		$('#showResult').show()
 
 		setTimeout(function (){
