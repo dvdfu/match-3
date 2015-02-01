@@ -36,6 +36,12 @@
   color: red;
 }
 
+#minusone{
+  color: red;
+  font-size: 32px;
+  font-weight: 900;
+}
+
 .list-group img {
   height: 30px;
   width: 30px;

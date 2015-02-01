@@ -61,7 +61,7 @@ socket.on('successRequest', function (){
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
-	showX()
+	showMinusOne();
 });
 
 socket.on('setupPhase', function (score){
@@ -154,12 +154,13 @@ function noMoreClickHandler(){
 }
 
 function showCheckMark(){
-	$('.fa-times').hide()
+	$('.fa-times').hide();
+	$('#minusone').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
 		$('#showBoard').hide()
-		$('.fa-check').show()
+		$('.fa-check').show();
 		$('#showResult').show()
 
 		setTimeout(function (){
@@ -176,12 +177,39 @@ function showCheckMark(){
 }
 
 function showX(){
-	$('.fa-check').hide()
+	$('.fa-check').hide();
+	$('#minusone').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
 		$('#showBoard').hide()
-		$('.fa-times').show()
+		$('.fa-times').show();
+		$('#showResult').show()
+
+		setTimeout(function (){
+			$('#showResult').hide()
+			$('#showBoard').show()
+			$('#showBoard').animate({
+				opacity: 1
+			}, 250, function (){
+				$('.tile').unbind('click')
+				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').unbind('click')
+				$('#no-more').bind('click', noMoreClickHandler)
+			})
+		}, 500)
+
+	})
+}
+
+function showMinusOne(){
+	$('.fa-check').hide();
+	$('.fa-times').hide();
+	$('#showBoard').animate({
+		opacity: 0
+	}, 250, function (){
+		$('#showBoard').hide()
+		$('#minusone').show();
 		$('#showResult').show()
 
 		setTimeout(function (){
