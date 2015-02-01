@@ -28,10 +28,17 @@
   vertical-align: middle;
 }
 
+.fa-check {
+  color: green;
+}
+
+.fa-times{
+  color: red;
+}
+
 .list-group img {
   height: 30px;
   width: 30px;
   float: left;
   border-radius: 50%;
-}
 }

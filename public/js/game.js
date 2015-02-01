@@ -2,10 +2,6 @@ var socket = io();
 var userObj;
 var guess = [];
 var OPACITY = '0.35'
-var time;
-var WRONG_ANSWER_PENALTY = 20;
-var MORE_MOVES_PENALTY = 30;
-var clear_interval;
 
 
 socket.on('gamePhase', function (tiles) {
@@ -44,19 +40,16 @@ socket.on('existingUser', function(user){
 });
 
 socket.on('errorRequest', function (){
-	console.log("WRONG ANSWER")
-	var tiles = $('.tile')
-	for (var i = tiles.length - 1; i >= 0; i--) {
-		if(tiles[i].style.opacity === OPACITY){
-			tiles[i].
-		}
-	};
-	//penalty(WRONG_ANSWER_PENALTY);
+	showX()
 });
+
+socket.on('successRequest', function (){
+	showCheckMark()
+})
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
-	//penalty(MORE_MOVES_PENALTY);
+
 });
 
 function renderTiles(tiles) {
@@ -105,10 +98,9 @@ function tileClickHandler(){
 				user: userObj,
 				tiles: guess.sort(function (a,b){return a-b})
 			})
-			// for (var i = guess.length - 1; i >= 0; i--) {
-			// 	document.getElementById(guess[i]).style.opacity = 1
-			// };
-
+			for (var i = guess.length - 1; i >= 0; i--) {
+				document.getElementById(guess[i]).style.opacity = 1
+			};
 			guess = []
 		}
 	}
@@ -118,19 +110,30 @@ function noMoreClickHandler(){
 	socket.emit('noMoreMovesRequest', userObj);
 }
 
-function penalty(penaltyTime){
-	time = penaltyTime;
-	$('.tile').unbind("click");
-	$('#no-more').unbind("click");
-	clear_interval = setInterval(function () {
-		if (time == 0) {
-			$('.tile').bind("click", tileClickHandler);
-			$('#no-more').bind("click", noMoreClickHandler);
-			console.log("client time is 0");
-			clearInterval(clear_interval);
-		} else {
-			time--;
-			$("#timer").text("Penalty Time: " + (time / 10).toFixed(1) + "s");
+function showCheckMark(){
+  for (var i = 9 - 1; i >= 0; i--) {
+    if(i !== 4)
+      document.getElementById($('.tile')[i].id).style.opacity = 0.3
+    else{
+      var svg = $('.tile')[i].children
+      var $el = $('.tile')[i]
+      $el.style.background = 'black'
+      $($el).empty()
+      $($el).append('<i class="fa fa-check fa-3x"></i>')
+    }
+  };
+}
+
+function showX(){
+	for (var i = 9 - 1; i >= 0; i--) {
+		if(i !== 4)
+			document.getElementById($('.tile')[i].id).style.opacity = 0.3
+		else{
+			var svg = $('.tile')[i].children
+			var $el = $('.tile')[i]
+			$el.style.background = 'black'
+			$($el).empty()
+			$($el).append('<i class="fa fa-times fa-3x"></i>')
 		}
-	}, 100);
+	};
 }
