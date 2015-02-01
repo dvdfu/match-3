@@ -27,12 +27,10 @@
   color: red;
 }
 
-#plusone{
-  color: green;
-}
-
 #minusone{
   color: red;
+  font-size: 32px;
+  font-weight: 900;
 }
 
 .list-group img {
