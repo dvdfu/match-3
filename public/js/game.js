@@ -49,7 +49,7 @@ socket.on('successRequest', function (){
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
-
+	showX()
 });
 
 function renderTiles(tiles) {
