@@ -58,10 +58,20 @@ function tileSolveRequest(reqObj, socket){
 			answers.splice(i, 1);
 			moveLog.push(resObj);
 			console.log('answers left: ' + answers.length)
-			break;
+			return;
 		}
 	}
 	if(!correctReq){
+		console.log('incorrect req');
+		for(var i =0; i < moveLog.length; i++){
+			if( moveLog[i].tiles[0].id === reqTiles[0] &&
+			moveLog[i].tiles[1].id === reqTiles[1] &&
+			moveLog[i].tiles[2].id === reqTiles[2]){
+				console.log('sending thumb');
+				socket.emit('errorRequest', moveLog[i].user.thumbnail);
+				return;
+			}
+		}
 		socket.emit('errorRequest');
 	}
 }

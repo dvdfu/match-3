@@ -51,8 +51,14 @@ socket.on('existingUser', function(user){
 	userObj = user;
 });
 
-socket.on('errorRequest', function (){
-	showX()
+socket.on('errorRequest', function (thumbnail){
+	if (thumbnail) {
+		showFace(thumbnail);
+		console.log("show face" + thumbnail);
+	} else {
+		showX();
+		console.log("normal show x");
+	}
 });
 
 socket.on('successRequest', function (){
@@ -155,6 +161,7 @@ function noMoreClickHandler(){
 
 function showCheckMark(){
 	$('.fa-times').hide()
+	$('#show-face').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
@@ -175,8 +182,39 @@ function showCheckMark(){
 	})
 }
 
+function showFace(thumbnail){
+	if (!thumbnail) return
+
+	$('.fa-check').hide()
+	$('.fa-times').hide()
+	$('#showBoard').animate({
+		opacity: 0
+	}, 250, function (){
+		$('#showBoard').hide()
+		$('#actual-image').attr("src", thumbnail);
+		$('#show-face').show();
+		$('#showResult').show()
+
+		setTimeout(function (){
+			$('#showResult').hide()
+			$('#showBoard').show()
+			$('#showBoard').animate({
+				opacity: 1
+			}, 250, function (){
+				$('.tile').unbind('click')
+				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').unbind('click')
+				$('#no-more').bind('click', noMoreClickHandler)
+			})
+		}, 500)
+
+	})
+}
+
+
 function showX(){
 	$('.fa-check').hide()
+	$('#show-face').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
