@@ -3,6 +3,15 @@
   text-align: center;
 }
 
+
+.active {
+  padding: 8px !important;
+}
+
+.list-group-item {
+  padding: 0px;
+}
+
 .moveLog {
   position: relative;
   margin: 0px 15px;
@@ -13,9 +22,9 @@
 }
 
 .tileWrapper{
-  width: 10%;
+  width: 20%;
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 3%;
   vertical-align: middle;
 }
 
