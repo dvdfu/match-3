@@ -1,11 +1,10 @@
 (function (){
 
   socket.on('tileSolved', function (move) {
-    $('<li class="list-group-item">'+
-      (move.user ? '<img src="'+ move.user.thumbnail +'"/>' : '') +
-      '<span class="badge">'+((move.user && move.user.username) || 'no name') +'</span>'+
-      generateShape(move.tiles)+
-      '</li>').insertAfter('.active');
+    $('<li class="list-group-item"><div class="row"><div class="col-xs-2">'+
+      (move.user ? '<img src="'+ move.user.thumbnail +'"/>' : '') +'</div>'+
+      '<div class="col-xs-4"><span class="badge">'+((move.user && move.user.username) || 'no name') +'</span></div>'+
+      '<div class="col-xs-6">' + generateShape(move.tiles)+'</div></div></li>').insertAfter('.active');
   });
 
   function generateShape(tiles){
