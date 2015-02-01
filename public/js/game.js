@@ -19,7 +19,7 @@ socket.on('gamePhase', function (tiles) {
 	guess = [];
 	renderTiles(tiles);
 	$('.list-group').empty()
-	$('.list-group').append('<li class="list-group-item active">Match History</li>')
+	$('#match-history').append('<li class="list-group-item active">Match History</li>')
 	$('#score').hide();
 	$('#score').css('opacity', 0);
 })
