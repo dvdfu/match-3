@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Match-3</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel='stylesheet' type='text/css' href='css/moveLog.css'>
@@ -13,6 +13,11 @@
   <body>
     <div class="container">
       <div class="container" id="instructions"></div>
+      <div class="container" id="score" style="text-align: center;">
+        <div id="winner-text"></div>
+        <img id="user-image" src="" />
+        <div id="username"></div>
+      </div>
       <div class="container" id="tile-container">
         <div id="showBoard">
 	        <div class="row" id="row0"></div>
