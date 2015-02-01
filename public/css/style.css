@@ -40,7 +40,7 @@ form button {
 .container {
 	padding: 0px;
 	text-align: center;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -89,6 +89,13 @@ form button {
 }
 
 .tile {
+	background: #fff;
+	border-radius: 10%;
+	margin: 0px;
+	padding: 20%;
+}
+
+.instruction-tile{
 	background: #fff;
 	border-radius: 10%;
 	margin: 0px;
@@ -161,4 +168,15 @@ form button {
 #winner-text {
 	font-size: 400%;
     color: white;
+}
+
+#instructions-title{
+	color: white;
+	font-size: 200%;
+	margin-top: -25px;
+}
+
+.instructions-sub-title{
+	color: gray;
+	font-size: 120%;
 }
