@@ -58,7 +58,7 @@ function tileSolveRequest(reqObj, socket){
 			answers.splice(i, 1);
 			moveLog.push(resObj);
 			console.log('answers left: ' + answers.length)
-			break;
+			return;
 		}
 	}
 	if(!correctReq){

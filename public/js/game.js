@@ -161,6 +161,7 @@ function noMoreClickHandler(){
 
 function showCheckMark(){
 	$('.fa-times').hide()
+	$('#show-face').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
@@ -213,6 +214,7 @@ function showFace(thumbnail){
 
 function showX(){
 	$('.fa-check').hide()
+	$('#show-face').hide();
 	$('#showBoard').animate({
 		opacity: 0
 	}, 250, function (){
