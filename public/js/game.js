@@ -19,7 +19,7 @@ socket.on('gamePhase', function (tiles) {
 	guess = [];
 	renderTiles(tiles);
 	$('.list-group').empty()
-	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
+	$('#match-history').append('<li class="list-group-item active">Match History</li>')
 	$('#score').hide();
 	$('#score').css('opacity', 0);
 })
@@ -65,7 +65,7 @@ socket.on('errorNoMoreMovesRequest',function(){
 	showX()
 });
 
-socket.on('setupPhase', function (score){
+socket.on('setupPhase', function (score) {
 	$('.tile').unbind('click');
 	$('#no-more').unbind('click');
 	var topUser;
@@ -81,10 +81,34 @@ socket.on('setupPhase', function (score){
 	$('#user-image').attr('src', topUser.user.thumbnail);
 	$('#username').text(topUser.user.username);
 	$('#winner-text').text('Winner!');
+	$('#runners-up').text('Runners Up');
 	$('#score').show();
 	$('#score').animate({
 		opacity: 1
 	}, 400, 'swing');
+
+	$('#scoreboard').empty();
+	// score.sort(function(a, b) {
+	// 	return b.points - a.points;
+	// });
+	for (var key in score) {
+		if (score[key].user.username !== topUser.user.username) {
+			$('#scoreboard').append(
+				'<li class="list-group-item">'+
+					'<div class="row">'+
+						'<div class="col-xs-4">'+
+							'<img src="'+score[key].user.thumbnail+'"/>'+
+						'</div>'+
+						'<div class="col-xs-4">'+
+							'<span class="badge">'+score[key].user.username+'</span>'+
+						'</div>'+
+						'<div class="col-xs-4">'+
+							'<span class="badge">'+score[key].points+'</span>'+
+						'</div>'+
+					'</div>'+
+				'</li>');
+		}
+	}
 	// slide(false);
 });
 

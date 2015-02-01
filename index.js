@@ -112,7 +112,7 @@ function setupPhase() {
 		score = {};
 		phase = 'gamePhase';
 		io.emit(phase, tiles);
-	}, 5000);
+	}, 8000);
 }
 
 
