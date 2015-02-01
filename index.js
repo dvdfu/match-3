@@ -69,28 +69,30 @@ function tileSolveRequest(reqObj, socket){
 function noMoreMovesRequest(user, socket){
 	if(answers.length === 0){
 		console.log('No more moves found by user: ' + user);
-		if(score[reqUser.username]){
-			score[reqUser.username].points += 2;
+		if(score[user.username]){
+			score[user.username].points += 2;
 		} else {
-			score[reqUser.username] = {
-				user: reqUser,
+			score[user.username] = {
+				user: user,
 				points: 2
 			};
 		}
 		phase = 'setupPhase';
+		console.log('score');
+		console.log(score);
 		io.emit(phase, score);
 		setupPhase();
 	} else {
 		console.log(util.format('There are still more moves: %j', user));
 		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
-		if(score[reqUser.username]){
-			if(score[reqUser.username].points > 0){
-				score[reqUser.username].points -= 1;
+		if(score[user.username]){
+			if(score[user.username].points > 0){
+				score[user.username].points -= 1;
 			}
 		} else {
-			score[reqUser.username] = {
-				user: reqUser,
+			score[user.username] = {
+				user: user,
 				points: 0
 			};
 		}
@@ -119,6 +121,8 @@ app.get('/', function(req, res){
 app.use(express.static(__dirname+'/public'));
 
 io.on('connection', function(socket){
+	socket.emit('userSetup');
+
 	socket.emit(phase, tiles);
 	for(var i = 0; i < moveLog.length; i++){
 		socket.emit('tileSolved', moveLog[i]);
