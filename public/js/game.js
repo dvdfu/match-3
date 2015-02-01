@@ -34,19 +34,16 @@ socket.on('userSetup', function(){
 		kik.getUser(function (user){
 			if (!user){
 				socket.emit('addUser');
-				console.log("no kik permission");
 			} else {
 				userObj = {
 					username: user.username,
 					thumbnail: user.thumbnail
 				};
 				socket.emit('addKikUser', userObj);
-				console.log("kik permission");
 			}
 		});
 	} else {
 		socket.emit('addUser');
-		console.log("kik not enabled");
 	}
 })
 
@@ -57,10 +54,8 @@ socket.on('existingUser', function(user){
 socket.on('errorRequest', function (thumbnail){
 	if (thumbnail) {
 		showFace(thumbnail);
-		console.log("show face" + thumbnail);
 	} else {
 		showX();
-		console.log("normal show x");
 	}
 });
 
@@ -69,7 +64,6 @@ socket.on('successRequest', function (){
 })
 
 socket.on('errorNoMoreMovesRequest',function(){
-	console.log("THERE ARE STILL MOVES");
 	showX()
 });
 
@@ -81,7 +75,6 @@ socket.on('setupPhase', function (score){
 		topUser = score[key];
 		break;
 	}
-	console.log(topUser);
 	for(var key in score){
 		if(score[key].points > topUser.points){
 			topUser = score[key];

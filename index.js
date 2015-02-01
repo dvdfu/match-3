@@ -41,7 +41,6 @@ function tileSolveRequest(reqObj, socket){
 		if( answers[i][0].id === reqTiles[0] &&
 			answers[i][1].id === reqTiles[1] &&
 			answers[i][2].id === reqTiles[2]){
-			console.log('Answer found by user: ' + JSON.stringify(reqUser))
 			correctReq = true;
 			if(score[reqUser.username]){
 				score[reqUser.username].points += 1;
@@ -58,16 +57,15 @@ function tileSolveRequest(reqObj, socket){
 			answers.splice(i, 1);
 			moveLog.push(resObj);
 			console.log('answers left: ' + answers.length)
+			console.log(util.format('answers: %j', answers));
 			return;
 		}
 	}
 	if(!correctReq){
-		console.log('incorrect req');
 		for(var i =0; i < moveLog.length; i++){
 			if( moveLog[i].tiles[0].id === reqTiles[0] &&
 			moveLog[i].tiles[1].id === reqTiles[1] &&
 			moveLog[i].tiles[2].id === reqTiles[2]){
-				console.log('sending thumb');
 				socket.emit('errorRequest', moveLog[i].user.thumbnail);
 				return;
 			}
@@ -78,7 +76,7 @@ function tileSolveRequest(reqObj, socket){
 
 function noMoreMovesRequest(user, socket){
 	if(answers.length === 0){
-		console.log('No more moves found by user: ' + user);
+		console.log('No more moves found by user: ' + user.username);
 		if(score[user.username]){
 			score[user.username].points += 2;
 		} else {
@@ -88,13 +86,9 @@ function noMoreMovesRequest(user, socket){
 			};
 		}
 		phase = 'setupPhase';
-		console.log('score');
-		console.log(score);
 		io.emit(phase, score);
 		setupPhase();
 	} else {
-		console.log(util.format('There are still more moves: %j', user));
-		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
 		if(score[user.username]){
 			if(score[user.username].points > 0){
@@ -115,12 +109,10 @@ function setupPhase() {
 	console.log(answers)
 	moveLog = [];
 	score = {};
-	console.log("Before Set Timeout");
 	setTimeout(function(){
 		phase = 'gamePhase';
 		io.emit(phase, tiles);
 	}, 5000);
-	console.log("After Set Timeout");
 }
 
 
@@ -153,14 +145,11 @@ io.on('connection', function (socket){
 		socket.emit('setNonKikUser', newUser);
 	});
 
-	console.log('a user connected');
 	socket.on('tileSolveRequest', function (reqObj){
-		console.log(util.format('tileSolveRequest incoming %j', reqObj))
 		tileSolveRequest(reqObj, socket);
 	});
 
 	socket.on('noMoreMovesRequest', function(user){
-		console.log(util.format('noMoreMovesRequest incoming %j', user));
 		noMoreMovesRequest(user, socket);
 	});
 });
