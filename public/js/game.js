@@ -52,11 +52,6 @@ socket.on('errorNoMoreMovesRequest',function(){
 
 });
 
-socket.on('setupPhase', function(score){
-	$('.tile').unbind('click');
-	$('#no-more').unbind('click');
-});
-
 function renderTiles(tiles) {
 	$('#row0').empty();
 	$('#row1').empty();
@@ -106,6 +101,8 @@ function tileClickHandler(){
 			for (var i = guess.length - 1; i >= 0; i--) {
 				document.getElementById(guess[i]).style.opacity = 1
 			};
+			$('.tile').unbind('click')
+			$('#no-more').unbind('click')
 			guess = []
 		}
 	}
@@ -116,27 +113,46 @@ function noMoreClickHandler(){
 }
 
 function showCheckMark(){
-  for (var i = 9 - 1; i >= 0; i--) {
-    if(i !== 4)
-      document.getElementById($('.tile')[i].id).style.opacity = 0.3
-    else{
-      var svg = $('.tile')[i].children
-      var $el = $('.tile')[i]
-      $($el).empty()
-      $($el).append('<i class="fa fa-check fa-3x"></i>')
-    }
-  };
+	$('.fa-times').hide()
+	$('#showBoard').animate({
+		opacity: 0
+	}, 250, function (){
+		$('#showBoard').hide()
+		$('.fa-check').show()
+		$('#showResult').show()
+
+		setTimeout(function (){
+			$('#showResult').hide()
+			$('#showBoard').show()
+			$('#showBoard').animate({
+				opacity: 1
+			}, 250, function (){
+				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').bind('click', noMoreClickHandler)
+			})
+		}, 500)
+	})
 }
 
 function showX(){
-	for (var i = 9 - 1; i >= 0; i--) {
-		if(i !== 4)
-			document.getElementById($('.tile')[i].id).style.opacity = 0.3
-		else{
-			var svg = $('.tile')[i].children
-			var $el = $('.tile')[i]
-			$($el).empty()
-			$($el).append('<i class="fa fa-times fa-3x"></i>')
-		}
-	};
+	$('.fa-check').hide()
+	$('#showBoard').animate({
+		opacity: 0
+	}, 250, function (){
+		$('#showBoard').hide()
+		$('.fa-times').show()
+		$('#showResult').show()
+
+		setTimeout(function (){
+			$('#showResult').hide()
+			$('#showBoard').show()
+			$('#showBoard').animate({
+				opacity: 1
+			}, 250, function (){
+				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').bind('click', noMoreClickHandler)
+			})
+		}, 500)
+
+	})
 }

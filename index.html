@@ -11,9 +11,34 @@
   <body>
     <div class="container">
       <div class="container" id="tile-container">
-        <div class="row" id="row0"></div>
-        <div class="row" id="row1"></div>
-        <div class="row" id="row2"></div>
+        <div id="showBoard">
+	        <div class="row" id="row0"></div>
+	        <div class="row" id="row1"></div>
+	        <div class="row" id="row2"></div>
+        </div>
+        <div id="showResult" style="display: none;">
+	        <div class="row" id="row0">
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        </div>
+	        <div class="row" id="row1">
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        	<div class="col-xs-4">
+	        		<div style="background: black;" class="tile">
+	        			<i class="fa fa-check fa-3x"></i>
+	        			<i class="fa fa-times fa-3x"></i>
+	        		</div>
+	        	</div>
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        </div>
+	        <div class="row" id="row2">
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        	<div class="col-xs-4"><div style="opacity: 0;" class="tile color-red-light" id="11"><svg class="shape-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle class="shape color-red" cx="50" cy="50" r="50"></circle></svg></div></div>
+	        </div>
+        </div>
+
         <div class="row">
           <div class="col-xs-12">
             <div class="btn btn-success btn-block" id="no-more">No more moves?</div>
