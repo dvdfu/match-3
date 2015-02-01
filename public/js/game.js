@@ -22,30 +22,28 @@ socket.on('gamePhase', function (tiles) {
 	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
 	$('#score').hide();
 	$('#score').css('opacity', 0);
-	// slide(true);
 })
 
 socket.on('setNonKikUser', function (user){
 	userObj = user;
 });
 
-socket.on('userSetup', function(){
-	if(kik.enabled){
-		kik.getUser(function (user){
-			if (!user){
-				socket.emit('addUser');
-			} else {
-				userObj = {
-					username: user.username,
-					thumbnail: user.thumbnail
-				};
-				socket.emit('addKikUser', userObj);
-			}
-		});
-	} else {
-		socket.emit('addUser');
-	}
-})
+
+if(kik.enabled){
+	kik.getUser(function (user){
+		if (!user){
+			socket.emit('addUser');
+		} else {
+			userObj = {
+				username: user.username,
+				thumbnail: user.thumbnail
+			};
+			socket.emit('addKikUser', userObj);
+		}
+	});
+} else {
+	socket.emit('addUser');
+}
 
 socket.on('existingUser', function(user){
 	userObj = user;

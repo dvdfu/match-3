@@ -108,11 +108,11 @@ function setupPhase() {
 	answers = tileGenerator.solveTiles(tiles);
 	console.log(answers)
 	moveLog = [];
-	score = {};
 	setTimeout(function(){
+		score = {};
 		phase = 'gamePhase';
 		io.emit(phase, tiles);
-	}, 5000);
+	}, 15000);
 }
 
 
@@ -123,11 +123,14 @@ app.get('/', function(req, res){
 app.use(express.static(__dirname+'/public'));
 
 io.on('connection', function (socket){
-	socket.emit('userSetup');
 
-	socket.emit(phase, tiles);
-	for(var i = 0; i < moveLog.length; i++){
-		socket.emit('tileSolved', moveLog[i]);
+	if(phase === 'gamePhase'){
+		socket.emit(phase, tiles);
+		for(var i = 0; i < moveLog.length; i++){
+			socket.emit('tileSolved', moveLog[i]);
+		}
+	} else if(phase === 'setupPhase') {
+		socket.emit(phase, score);
 	}
 
 	socket.on('addKikUser', function (user){
