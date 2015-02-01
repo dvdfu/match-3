@@ -59,8 +59,9 @@ function tileSolveRequest(reqObj, socket){
 function noMoreMovesRequest(user, socket){
 	if(answers.length === 0){
 		console.log('No more moves found by user: ' + user);
-		io.emit('setupPhase');
-		setTimeout(setupPhase, 5000);
+		phase = 'setupPhase';
+		io.emit(phase, score);
+		setupPhase();
 	} else {
 		console.log('There are still more moves: ' + user);
 		socket.emit('errorNoMoreMovesRequest');
@@ -73,7 +74,9 @@ function setupPhase() {
 	console.log(answers)
 	moveLog = [];
 	phase = 'gamePhase';
-	io.emit(phase, tiles);
+	setTimeout(function(){
+		io.emit(phase, tiles);
+	}, 5000);
 }
 
 
