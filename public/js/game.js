@@ -26,7 +26,7 @@ socket.on('userSetup', function(){
 					username: user.username,
 					thumbnail: user.thumbnail
 				};
-				socket.emit('addKikUser', user);
+				socket.emit('addKikUser', userObj);
 				console.log("kik permission");
 			}
 		});
@@ -34,21 +34,26 @@ socket.on('userSetup', function(){
 		socket.emit('addUser');
 		console.log("kik not enabled");
 	}
-});
+})
 
 socket.on('existingUser', function(user){
 	userObj = user;
 });
 
 socket.on('errorRequest', function (){
-	console.log("WRONG ANSWER");
+	showX()
 });
+
+socket.on('successRequest', function (){
+	showCheckMark()
+})
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
+	showX()
 });
 
-socket.on('setupPhase', function(score){
+socket.on('setupPhase', function (score){
 	$('.tile').unbind('click');
 	$('#no-more').unbind('click');
 	// slide(false);
@@ -101,7 +106,8 @@ function renderTiles(tiles) {
 
 		$('#row' + Math.floor(i / 3)).append(html);
 	}
-
+	$('.tile').unbind('click')
+	$('#no-more').unbind('click')
 	$('.tile').on('click', tileClickHandler);
 	$('#no-more').on('click', noMoreClickHandler);
 }
@@ -125,6 +131,7 @@ function tileClickHandler(){
 			for (var i = guess.length - 1; i >= 0; i--) {
 				document.getElementById(guess[i]).style.opacity = 1
 			};
+			$('.tile').unbind('click')
 			guess = []
 		}
 	}
@@ -132,4 +139,52 @@ function tileClickHandler(){
 
 function noMoreClickHandler(){
 	socket.emit('noMoreMovesRequest', userObj);
+	$('#no-more').unbind('click')
+}
+
+function showCheckMark(){
+	$('.fa-times').hide()
+	$('#showBoard').animate({
+		opacity: 0
+	}, 250, function (){
+		$('#showBoard').hide()
+		$('.fa-check').show()
+		$('#showResult').show()
+
+		setTimeout(function (){
+			$('#showResult').hide()
+			$('#showBoard').show()
+			$('#showBoard').animate({
+				opacity: 1
+			}, 250, function (){
+				$('.tile').unbind('click')
+				$('.tile').bind('click', tileClickHandler)
+			})
+		}, 500)
+	})
+}
+
+function showX(){
+	$('.fa-check').hide()
+	$('#showBoard').animate({
+		opacity: 0
+	}, 250, function (){
+		$('#showBoard').hide()
+		$('.fa-times').show()
+		$('#showResult').show()
+
+		setTimeout(function (){
+			$('#showResult').hide()
+			$('#showBoard').show()
+			$('#showBoard').animate({
+				opacity: 1
+			}, 250, function (){
+				$('.tile').unbind('click')
+				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').unbind('click')
+				$('#no-more').bind('click', noMoreClickHandler)
+			})
+		}, 500)
+
+	})
 }

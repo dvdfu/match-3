@@ -120,7 +120,7 @@ app.get('/', function(req, res){
 
 app.use(express.static(__dirname+'/public'));
 
-io.on('connection', function(socket){
+io.on('connection', function (socket){
 	socket.emit('userSetup');
 
 	socket.emit(phase, tiles);
