@@ -91,8 +91,10 @@ socket.on('setupPhase', function (score) {
 	// score.sort(function(a, b) {
 	// 	return b.points - a.points;
 	// });
+	var drawRunners = false;
 	for (var key in score) {
-		if (score[key].user.username !== topUser.user.username) {
+		if (score[key].user.username !== topUser.user.username && score[key].points > 0) {
+			drawRunners = true;
 			$('#scoreboard').append(
 				'<li class="list-group-item">'+
 					'<div class="row">'+
@@ -108,6 +110,11 @@ socket.on('setupPhase', function (score) {
 					'</div>'+
 				'</li>');
 		}
+	}
+	if (drawRunners) {
+		$('#runners-up').show();
+	} else {
+		$('#runners-up').hide();
 	}
 	// slide(false);
 });
