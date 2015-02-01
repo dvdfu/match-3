@@ -117,7 +117,6 @@ function showCheckMark(){
     else{
       var svg = $('.tile')[i].children
       var $el = $('.tile')[i]
-      $el.style.background = 'black'
       $($el).empty()
       $($el).append('<i class="fa fa-check fa-3x"></i>')
     }
@@ -131,7 +130,6 @@ function showX(){
 		else{
 			var svg = $('.tile')[i].children
 			var $el = $('.tile')[i]
-			$el.style.background = 'black'
 			$($el).empty()
 			$($el).append('<i class="fa fa-times fa-3x"></i>')
 		}
