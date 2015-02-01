@@ -8,6 +8,7 @@ socket.on('gamePhase', function (tiles) {
 	renderTiles(tiles);
 	$('.list-group').empty()
 	$('.list-group').append('<li class="list-group-item active">Move Log</li>')
+	// slide(true);
 })
 
 socket.on('setNonKikUser', function (user){
@@ -49,8 +50,36 @@ socket.on('successRequest', function (){
 
 socket.on('errorNoMoreMovesRequest',function(){
 	console.log("THERE ARE STILL MOVES");
-
+	showX()
 });
+
+socket.on('setupPhase', function (score){
+	$('.tile').unbind('click');
+	$('#no-more').unbind('click');
+	// slide(false);
+	console.log('score');
+	console.log(score);
+});
+
+function slide(on) {
+	if (on) {
+		$('#tile-container').animate({
+			top: '+=300'
+		}, 500);
+
+		$('.moveLog').animate({
+			left: '-=400'
+		}, 500);
+	} else {
+		$('#tile-container').animate({
+			top: '-=300'
+		}, 500);
+
+		$('.moveLog').animate({
+			left: '+=400'
+		}, 500);
+	}
+}
 
 function renderTiles(tiles) {
 	$('#row0').empty();
@@ -77,7 +106,8 @@ function renderTiles(tiles) {
 
 		$('#row' + Math.floor(i / 3)).append(html);
 	}
-
+	$('.tile').unbind('click')
+	$('#no-more').unbind('click')
 	$('.tile').on('click', tileClickHandler);
 	$('#no-more').on('click', noMoreClickHandler);
 }
@@ -102,7 +132,6 @@ function tileClickHandler(){
 				document.getElementById(guess[i]).style.opacity = 1
 			};
 			$('.tile').unbind('click')
-			$('#no-more').unbind('click')
 			guess = []
 		}
 	}
@@ -110,6 +139,7 @@ function tileClickHandler(){
 
 function noMoreClickHandler(){
 	socket.emit('noMoreMovesRequest', userObj);
+	$('#no-more').unbind('click')
 }
 
 function showCheckMark(){
@@ -129,8 +159,8 @@ function showCheckMark(){
 			$('#showBoard').animate({
 				opacity: 1
 			}, 250, function (){
+				$('.tile').unbind('click')
 				$('.tile').bind('click', tileClickHandler)
-				$('#no-more').bind('click', noMoreClickHandler)
 			})
 		}, 500)
 	})
@@ -153,7 +183,9 @@ function showX(){
 			$('#showBoard').animate({
 				opacity: 1
 			}, 250, function (){
+				$('.tile').unbind('click')
 				$('.tile').bind('click', tileClickHandler)
+				$('#no-more').unbind('click')
 				$('#no-more').bind('click', noMoreClickHandler)
 			})
 		}, 500)

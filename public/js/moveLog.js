@@ -1,22 +1,11 @@
 (function (){
-  socket.on('tileSolved', function (move){
-    $('.list-group-item.active').remove()
-    var log = $('.list-group-item')
-    $('.list-group').empty()
 
-    $('.list-group').append('<li class="list-group-item active">Move Log</li>')
-    $('.list-group')
-      .append(
-        '<li class="list-group-item">'+
-        (move.user ? '<img src="'+ move.user.thumbnail +'"/>' : '') +
-        generateShape(move.tiles)+
-        '<span class="badge">'+
-        (move.user && move.user.username) || '' +
-        '</span>'+
-        '</li>'
-      )
-
-    $('.list-group').append(log)
+  socket.on('tileSolved', function (move) {
+    $('<li class="list-group-item">'+
+      (move.user ? '<img src="'+ move.user.thumbnail +'"/>' : '') +
+      '<span class="badge">'+((move.user && move.user.username) || 'no name') +'</span>'+
+      generateShape(move.tiles)+
+      '</li>').insertAfter('.active');
   });
 
   function generateShape(tiles){
