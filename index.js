@@ -63,7 +63,7 @@ function noMoreMovesRequest(user, socket){
 		io.emit(phase, score);
 		setupPhase();
 	} else {
-		console.log(util.format('There are still more moves: %j' + user));
+		console.log(util.format('There are still more moves: %j', user));
 		console.log(util.format('answers: %j', answers));
 		socket.emit('errorNoMoreMovesRequest');
 	}
