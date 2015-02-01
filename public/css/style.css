@@ -5,7 +5,7 @@
 }
 
 body {
-	font: 13px Helvetica, Arial;
+	font-family: 'Lato', sans-serif;
 	background-color: #123;
 }
 
@@ -79,7 +79,7 @@ form button {
 }
 
 .col-xs-6 {
-	padding: 2%;
+	padding: 1.5%;
 	text-align: center;
 }
 
@@ -100,16 +100,12 @@ form button {
 	height: 100%;
 }
 
-.shape {
-	
-}
-
 .color-red {
-	fill: #f41;
+	fill: #f11;
 }
 
 .color-blue {
-	fill: #28f;
+	fill: #26f;
 }
 
 .color-yellow {
@@ -148,22 +144,21 @@ form button {
 	height: 100%;
 	background: #001;
 	z-index: 10;
-	padding: 10%;
+	padding: 25% 5%;
 }
 
 #user-image {
 	width: 60%;
 	border-radius: 10px;
+	margin: 5%;
 }
 
 #username {
-    font-size: 300%;
+    font-size: 250%;
     color: white;
-    margin-top: 10%;
 }
 
 #winner-text {
 	font-size: 400%;
     color: white;
-    margin-bottom: 5%;
 }
