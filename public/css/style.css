@@ -40,7 +40,7 @@ form button {
 .container {
 	padding: 0px;
 	text-align: center;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -172,8 +172,11 @@ form button {
 
 #instructions-title{
 	color: white;
+	font-size: 200%;
+	margin-top: -25px;
 }
 
 .instructions-sub-title{
 	color: gray;
+	font-size: 120%;
 }
